@@ -1,0 +1,198 @@
+.contact-hero {
+	background-color: rgba(0, 0, 0, 0.6);
+	color: var(--pure-white);
+	text-align: center;
+	padding: 3px 20px;
+	margin: 30px auto 30px auto;
+	/* 상 우 하 좌 마진 설정 */
+	max-width: 1160px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 280px;
+	border-radius: 20px;
+	/* 모서리를 둥글게 만듭니다 */
+}
+
+.contact-hero::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: url('../images/logo.png');
+	background-size: 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0.3;
+	z-index: -1;
+}
+
+.contact-hero h1 {
+	font-size: 48px;
+	margin-bottom: 20px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.contact-hero p {
+	font-size: 20px;
+	max-width: 600px;
+	margin: 0 auto 30px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.support-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.support-item {
+	margin-bottom: 40px;
+	background: #fff;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 60px 20px;
+}
+
+.contact-title {
+	text-align: center;
+	margin-bottom: 40px;
+	font-size: 28px;
+}
+
+.contact-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px;
+	justify-content: center;
+	align-items: start;
+}
+
+.contact-item {
+	background: #f8f8f8;
+	padding: 30px;
+	border-radius: 10px;
+	text-align: center;
+	transition: transform 0.3s ease;
+	cursor: pointer;
+}
+
+.contact-item:hover {
+	transform: translateY(-5px);
+}
+
+.contact-icon {
+	font-size: 2.5rem;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+.contact-item h3 {
+	margin-bottom: 15px;
+	font-size: 1.2rem;
+	color: #333;
+}
+
+.contact-item p {
+	color: #666;
+	font-size: 0.9rem;
+	line-height: 1.6;
+	margin: 5px 0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+	.contact-grid {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+
+	.contact-item {
+		padding: 20px;
+	}
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0);
+	transition: all 0.3s ease-in-out;
+	opacity: 0;
+}
+
+.modal.show {
+	opacity: 1;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border-radius: 10px;
+	width: 80%;
+	max-width: 800px;
+	position: relative;
+	transform: translateY(20px);
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+}
+
+.modal.show .modal-content {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.modal.hide .modal-content {
+	transform: translateY(20px);
+	opacity: 0;
+}
+
+.modal.hide {
+	opacity: 0;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.close {
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	color: #aaa;
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.close:hover {
+	color: #000;
+}
+
+.inquiry-item {
+	cursor: pointer;
+}
+
+#kakaoMap {
+	width: 100%;
+	height: 400px;
+	border-radius: 10px;
+}
+
+:root {
+	--map-height: 400px;
+	--map-border-radius: 10px;
+}
