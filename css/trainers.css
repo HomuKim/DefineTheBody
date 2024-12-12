@@ -171,7 +171,7 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: transparent;
 	border: none;
 	color: white;
 	width: 40px;
@@ -203,6 +203,6 @@
 
 .prev-btn:hover,
 .next-btn:hover {
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: transparent;
 	opacity: 1;
 }
