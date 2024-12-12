@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>트레이너 소개 - 디파인더바디 피트니스</title>
+	<link rel="stylesheet" href="css/trainers.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+	<div id="header"></div>
+	<main>
+		<section class="trainer-hero">
+			<h1>트레이너 소개</h1>
+			<p>디파인더바디의 열정적인 트레이너들을 만나보세요</p>
+		</section>
+
+		<section class="trainers-grid">
+			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_kwon">
+				<img src="images/trainer1-thumbnail.jpg" alt="트레이너 1" class="trainer-image">
+				<img src="images/trainer1-full.jpg" alt="트레이너 1 전체 사진" class="trainer-full-image"
+					style="display: none;">
+			</div>
+			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_hyun">
+				<img src="images/trainer2-thumbnail.jpg" alt="트레이너 2" class="trainer-image">
+				<img src="images/trainer2-full.jpg" alt="트레이너 2 전체 사진" class="trainer-full-image"
+					style="display: none;">
+			</div>
+			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_han">
+				<img src="images/trainer3-thumbnail.jpg" alt="트레이너 3" class="trainer-image">
+				<img src="images/trainer3-full.jpg" alt="트레이너 3 전체 사진" class="trainer-full-image"
+					style="display: none;">
+			</div>
+			<div class="trainer-card" data-instagram="https://www.instagram.com/jongminwang">
+				<img src="images/trainer4-thumbnail.jpg" alt="트레이너 4" class="trainer-image">
+				<img src="images/trainer4-full.jpg" alt="트레이너 4 전체 사진" class="trainer-full-image"
+					style="display: none;">
+			</div>
+			<div class="trainer-card" data-instagram="https://www.instagram.com/ri0___0ha">
+				<img src="images/trainer5-thumbnail.png" alt="트레이너 5" class="trainer-image">
+				<img src="images/trainer5-full.png" alt="트레이너 5 전체 사진" class="trainer-full-image"
+					style="display: none;">
+			</div>
+			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_kim_">
+				<img src="images/trainer6-thumbnail.jpg" alt="트레이너 6" class="trainer-image">
+				<img src="images/trainer6-full.jpg" alt="트레이너 6 전체 사진" class="trainer-full-image"
+					style="display: none;">
+			</div>
+			<!-- 필요에 따라 더 많은 트레이너 카드를 추가할 수 있습니다 -->
+		</section>
+	</main>
+	<div id="footer"></div>
+	<div id="imageModal" class="modal">
+		<span class="close">&times;</span>
+		<div class="modal-content-container">
+			<img class="modal-content" id="modalImage">
+			<a id="instagramLink" class="instagram-button" target="_blank">
+				<img src="images/instagram-icon.png" alt="Instagram" class="instagram-icon">
+			</a>
+		</div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			var modal = document.getElementById("imageModal");
+			var modalImg = document.getElementById("modalImage");
+			var instagramLink = document.getElementById("instagramLink");
+			var closeBtn = document.getElementsByClassName("close")[0];
+			var trainerCards = document.querySelectorAll('.trainer-card');
+
+			trainerCards.forEach(function (card) {
+				card.onclick = function () {
+					modal.style.display = "flex";
+					var fullImage = this.querySelector('.trainer-full-image');
+					modalImg.src = fullImage.src;
+					instagramLink.href = this.dataset.instagram; // 데이터 속성에서 인스타그램 링크 가져오기
+
+					modalImg.style.opacity = 0;
+					instagramLink.style.opacity = 0;
+
+					modalImg.onload = function () {
+						setTimeout(() => {
+							modalImg.style.opacity = 1;
+							instagramLink.style.opacity = 1;
+						}, 50);
+					};
+				}
+			});
+
+			closeBtn.onclick = function () {
+				modalImg.style.opacity = 0;
+				instagramLink.style.opacity = 0;
+				setTimeout(() => {
+					modal.style.display = "none";
+				}, 500);
+			}
+
+			window.onclick = function (event) {
+				if (event.target == modal) {
+					modalImg.style.opacity = 0;
+					instagramLink.style.opacity = 0;
+					setTimeout(() => {
+						modal.style.display = "none";
+					}, 500);
+				}
+			}
+		});
+		window.addEventListener('load', function () {
+			if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+				document.body.classList.add('admin-logged-in');
+				makeContentEditable(true);
+			}
+			$("#header").load("header.html");
+			$("#footer").load("footer.html");
+		});
+	</script>
+</body>
+
+</html>
