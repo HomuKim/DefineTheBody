@@ -33,7 +33,7 @@
 				<img src="images/trainer3-full.jpg" alt="트레이너 3 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
-			<div class="trainer-card" data-instagram="https://www.instagram.com/jongminwang">
+			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_wang">
 				<img src="images/trainer4-thumbnail.jpg" alt="트레이너 4" class="trainer-image">
 				<img src="images/trainer4-full.jpg" alt="트레이너 4 전체 사진" class="trainer-full-image"
 					style="display: none;">
@@ -48,18 +48,25 @@
 				<img src="images/trainer6-full.jpg" alt="트레이너 6 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
+			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_kim_">
+				<img src="images/trainer7-thumbnail.jpg" alt="트레이너 7" class="trainer-image">
+				<img src="images/trainer7-full.jpg" alt="트레이너 7 전체 사진" class="trainer-full-image"
+					style="display: none;">
+			</div>
 			<!-- 필요에 따라 더 많은 트레이너 카드를 추가할 수 있습니다 -->
 		</section>
 	</main>
 	<div id="footer"></div>
 	<div id="imageModal" class="modal">
 		<span class="close">&times;</span>
+		<button class="prev-btn">&lt;</button>
 		<div class="modal-content-container">
 			<img class="modal-content" id="modalImage">
 			<a id="instagramLink" class="instagram-button" target="_blank">
 				<img src="images/instagram-icon.png" alt="Instagram" class="instagram-icon">
 			</a>
 		</div>
+		<button class="next-btn">&gt;</button>
 	</div>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
@@ -68,29 +75,97 @@
 			var instagramLink = document.getElementById("instagramLink");
 			var closeBtn = document.getElementsByClassName("close")[0];
 			var trainerCards = document.querySelectorAll('.trainer-card');
+			const prevBtn = document.querySelector('.prev-btn');
+			const nextBtn = document.querySelector('.next-btn');
+			let currentTrainerIndex = 0;
 
-			trainerCards.forEach(function (card) {
+			// 이미지 존재 여부 확인 및 카드 표시/숨김 처리
+			trainerCards.forEach(card => {
+				const thumbnailImg = card.querySelector('.trainer-image');
+				const fullImg = card.querySelector('.trainer-full-image');
+
+				function checkImage(img) {
+					return new Promise((resolve) => {
+						if (img.complete) {
+							resolve(img.naturalHeight !== 0);
+						} else {
+							img.onload = () => resolve(true);
+							img.onerror = () => resolve(false);
+						}
+					});
+				}
+
+				Promise.all([checkImage(thumbnailImg), checkImage(fullImg)])
+					.then(([thumbnailExists, fullExists]) => {
+						if (!thumbnailExists || !fullExists) {
+							card.style.display = 'none';
+						}
+					});
+			});
+
+			trainerCards.forEach(function (card, index) {
 				card.onclick = function () {
+					currentTrainerIndex = index;
 					modal.style.display = "flex";
+					modal.classList.add('active');
 					var fullImage = this.querySelector('.trainer-full-image');
 					modalImg.src = fullImage.src;
-					instagramLink.href = this.dataset.instagram; // 데이터 속성에서 인스타그램 링크 가져오기
+					instagramLink.href = this.dataset.instagram;
 
 					modalImg.style.opacity = 0;
 					instagramLink.style.opacity = 0;
+					prevBtn.style.opacity = 0;
+					nextBtn.style.opacity = 0;
 
 					modalImg.onload = function () {
 						setTimeout(() => {
 							modalImg.style.opacity = 1;
 							instagramLink.style.opacity = 1;
+							prevBtn.style.opacity = 0.6;
+							nextBtn.style.opacity = 0.6;
 						}, 50);
 					};
 				}
 			});
 
+			prevBtn.onclick = function (e) {
+				e.stopPropagation();
+				do {
+					currentTrainerIndex = (currentTrainerIndex - 1 + trainerCards.length) % trainerCards.length;
+				} while (trainerCards[currentTrainerIndex].style.display === 'none');
+				updateModalContent(trainerCards[currentTrainerIndex]);
+			}
+
+			nextBtn.onclick = function (e) {
+				e.stopPropagation();
+				do {
+					currentTrainerIndex = (currentTrainerIndex + 1) % trainerCards.length;
+				} while (trainerCards[currentTrainerIndex].style.display === 'none');
+				updateModalContent(trainerCards[currentTrainerIndex]);
+			}
+
+			function updateModalContent(card) {
+				modalImg.style.opacity = 0;
+				instagramLink.style.opacity = 0;
+
+				setTimeout(() => {
+					var fullImage = card.querySelector('.trainer-full-image');
+					modalImg.src = fullImage.src;
+					instagramLink.href = card.dataset.instagram;
+
+					modalImg.onload = function () {
+						modalImg.style.opacity = 1;
+						instagramLink.style.opacity = 1;
+					};
+				}, 300);
+			}
+
 			closeBtn.onclick = function () {
 				modalImg.style.opacity = 0;
 				instagramLink.style.opacity = 0;
+				prevBtn.style.opacity = 0;
+				nextBtn.style.opacity = 0;
+				modal.classList.remove('active');
 				setTimeout(() => {
 					modal.style.display = "none";
 				}, 500);
@@ -100,12 +175,16 @@
 				if (event.target == modal) {
 					modalImg.style.opacity = 0;
 					instagramLink.style.opacity = 0;
+					prevBtn.style.opacity = 0;
+					nextBtn.style.opacity = 0;
+					modal.classList.remove('active');
 					setTimeout(() => {
 						modal.style.display = "none";
 					}, 500);
 				}
 			}
 		});
+
 		window.addEventListener('load', function () {
 			if (sessionStorage.getItem('adminLoggedIn') === 'true') {
 				document.body.classList.add('admin-logged-in');
@@ -114,6 +193,7 @@
 			$("#header").load("header.html");
 			$("#footer").load("footer.html");
 		});
+
 	</script>
 </body>
 
