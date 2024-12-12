@@ -79,16 +79,25 @@
 }
 
 .contact-item {
-	background: #f8f8f8;
+	background: rgba(255, 255, 255, 0.1);
+	/* 거의 완전 투명한 배경 */
 	padding: 30px;
 	border-radius: 10px;
 	text-align: center;
-	transition: transform 0.3s ease;
+	transition: all 0.3s ease;
 	cursor: pointer;
+	backdrop-filter: blur(10px);
+	/* 배경 블러 효과 강화 */
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	/* 테두리 추가로 구분감 유지 */
 }
 
 .contact-item:hover {
+	background: rgba(255, 255, 255, 0.2);
+	/* 호버 시 약간 더 뚜렷하게 */
 	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	/* 그림자 효과 추가 */
 }
 
 .contact-icon {
