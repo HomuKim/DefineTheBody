@@ -32,6 +32,14 @@
 							<h3>회원권 종류는 어떻게 되나요?</h3>
 							<p>1개월, 4개월, 7개월, 12개월 단위로 회원권을 제공하고 있습니다. 자세한 내용은 문의 바랍니다.</p>
 						</li>
+						<li>
+							<h3>개인락커와 운동복은 무료인가요?</h3>
+							<p>개인락커와 운동복을 이용하시려면 별도로 결제 후 이용하셔야 합니다.</p>
+						</li>
+						<li>
+							<h3>PT를 결제하면 회원권은 무료인가요?</h3>
+							<p>PT와 회원권은 별도로 결제하셔야 합니다.</p>
+						</li>
 						<!-- 추가 FAQ 항목들 -->
 					</ul>
 				</div>
@@ -89,17 +97,33 @@
 				</div>
 				<div class="support-item">
 					<h2>운동 프로그램 안내</h2>
-					<ul class="program-list">
-						<li>
+					<div class="program-icons">
+						<div class="program-icon" onclick="openImageModal('images/pt.jpg')">
+							<i class="fas fa-dumbbell"></i>
 							<h3>1:1 퍼스널 트레이닝</h3>
 							<p>전문 트레이너와 함께하는 맞춤형 운동 프로그램</p>
-						</li>
-						<li>
+						</div>
+
+						<div class="program-icon" onclick="openImageModal('images/pilates.jpg')">
+							<i class="fas fa-spa"></i>
 							<h3>1:1 필라테스</h3>
-							<p>뭐라고 쓰지 흠...</p>
-						</li>
-						<!-- 추가 프로그램 안내 -->
-					</ul>
+							<p>코어 강화와 유연성 향상을 위한 전문 필라테스 프로그램</p>
+						</div>
+
+						<div class="program-icon">
+							<i class="fas fa-users"></i>
+							<h3>그룹 피트니스</h3>
+							<p>다양한 그룹 운동 클래스로 즐겁게 운동하세요</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- 이미지 모달 -->
+				<div id="imageModal" class="modal image-modal">
+					<div class="modal-content image-modal-content">
+						<span class="close">&times;</span>
+						<img id="modalImage" src="" alt="프로그램 이미지">
+					</div>
 				</div>
 			</div>
 		</section>
@@ -127,14 +151,12 @@
 					};
 					map = new kakao.maps.Map(container, options);
 
-					// 마커 생성
 					var marker = new kakao.maps.Marker({
 						position: new kakao.maps.LatLng(lat, lng),
 						clickable: true
 					});
 					marker.setMap(map);
 
-					// 마커 클릭 이벤트
 					kakao.maps.event.addListener(marker, 'click', function () {
 						window.open("https://map.kakao.com/link/to/디파인더바디," + lat + "," + lng);
 					});
@@ -142,7 +164,7 @@
 			}
 		}
 
-		function closeModal() {
+		function closeMapModal() {
 			var modal = document.getElementById("mapModal");
 			modal.classList.add('hide');
 			modal.classList.remove('show');
@@ -152,36 +174,61 @@
 			}, 300);
 		}
 
-		// 페이지 로드 완료 시 실행
-		window.onload = function () {
-			// 모달 닫기 버튼 이벤트
-			var span = document.getElementsByClassName("close")[0];
-			span.onclick = function () {
-				closeModal();
-			}
+		function openImageModal(imageSrc) {
+			var modal = document.getElementById("imageModal");
+			var modalImg = document.getElementById("modalImage");
+			modalImg.src = imageSrc;
 
-			// 모달 외부 클릭 시 닫기
-			window.onclick = function (event) {
-				var modal = document.getElementById("mapModal");
-				if (event.target == modal) {
-					closeModal();
-				}
-			}
-
-			// 채팅 문의 클릭 이벤트 (네이버 톡톡)
-			document.querySelector('.contact-item:first-child').onclick = function () {
-				window.open('https://talk.naver.com/ct/w5u13y?frm=pnmb&frm=nmb_detail#nafullscreen');
-			}
+			modal.style.display = "block";
+			setTimeout(() => {
+				modal.classList.add('show');
+			}, 10);
 		}
 
-		window.addEventListener('load', function () {
+		function closeImageModal() {
+			var modal = document.getElementById("imageModal");
+			modal.classList.add('hide');
+			modal.classList.remove('show');
+			setTimeout(() => {
+				modal.style.display = "none";
+				modal.classList.remove('hide');
+			}, 300);
+		}
+
+		$(document).ready(function () {
+			// 카카오맵 모달 관련
+			$('#mapModal .close').on('click', closeMapModal);
+
+			// 이미지 모달 관련
+			$('#imageModal .close').on('click', closeImageModal);
+
+			// 모달 외부 클릭 시 닫기
+			$(window).on('click', function (event) {
+				var mapModal = document.getElementById("mapModal");
+				var imageModal = document.getElementById("imageModal");
+
+				if (event.target == mapModal) {
+					closeMapModal();
+				}
+				if (event.target == imageModal) {
+					closeImageModal();
+				}
+			});
+
+			// 채팅 문의 클릭 이벤트
+			$('.contact-item:first-child').on('click', function () {
+				window.open('https://talk.naver.com/ct/w5u13y?frm=pnmb&frm=nmb_detail#nafullscreen');
+			});
+
+			// 관리자 로그인 확인 및 헤더/푸터 로드
 			if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-				document.body.classList.add('admin-logged-in');
+				$('body').addClass('admin-logged-in');
 				makeContentEditable(true);
 			}
 			$("#header").load("header.html");
 			$("#footer").load("footer.html");
 		});
+
 	</script>
 </body>
 
