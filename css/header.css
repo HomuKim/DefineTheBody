@@ -104,3 +104,36 @@ header {
 .nav-links a.active {
 	color: var(--primary-red);
 }
+
+/* 햄버거 메뉴 아이콘 스타일 */
+.menu-icon {
+	display: none;
+	cursor: pointer;
+	font-size: 24px;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+	.navbar {
+		position: relative;
+	}
+
+	.nav-links {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		background-color: var(--pure-white);
+		flex-direction: column;
+	}
+
+	.menu-icon {
+		display: block;
+		cursor: pointer;
+	}
+
+	#nav-toggle:checked~.nav-links {
+		display: flex;
+	}
+}
