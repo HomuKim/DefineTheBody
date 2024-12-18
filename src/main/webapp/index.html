@@ -88,45 +88,27 @@
 		};
 	});
 
-	window.addEventListener('load', showSlides);
-
-	function adminLogin() {
-		const password = document.getElementById('adminPassword').value;
-		if (password === 'admin123') { // 실제 구현시 서버에서 검증해야 함
-			sessionStorage.setItem('adminLoggedIn', 'true');
-			document.body.classList.add('admin-logged-in');
-			makeContentEditable(true);
-			alert('관리자 모드로 로그인되었습니다.');
-		} else {
-			alert('비밀번호가 올바르지 않습니다.');
-		}
-	}
-
-	function adminLogout() {
-		sessionStorage.removeItem('adminLoggedIn');
-		document.body.classList.remove('admin-logged-in');
-		makeContentEditable(false);
-		alert('로그아웃되었습니다.');
-	}
-
 	function makeContentEditable(editable) {
 		const editableElements = document.querySelectorAll('.editable');
 		editableElements.forEach(el => el.contentEditable = editable);
 	}
 
-	window.addEventListener('load', function () {
-		if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-			document.body.classList.add('admin-logged-in');
-			makeContentEditable(true);
-		}
-		$("#header").load("header.html");
+	document.addEventListener('DOMContentLoaded', function () {
+		// header.html 로드
+		$("#header").load("header.html", function () {
+			// 헤더 로드 완료 후 실행될 코드
+			if (typeof initializeHeader === 'function') {
+				initializeHeader();
+			}
+		});
+
+		// footer.html 로드
 		$("#footer").load("footer.html");
+
+		// 슬라이드쇼 시작
+		showSlides();
 	});
 
-	function saveChanges() {
-		// 여기에 수정된 내용을 서버로 전송하는 코드 추가
-		alert('변경사항이 저장되었습니다.');
-	}
 </script>
 </body>
 

@@ -39,7 +39,10 @@
 	<div id="footer"></div>
 	<script>
 		window.addEventListener('load', function () {
-			$("#header").load("header.html");
+			$("#header").load("header.html", function () {
+				// 헤더 로드 완료 후 실행될 코드
+				initializeHeader();
+			});
 			$("#footer").load("footer.html");
 		});
 	</script>

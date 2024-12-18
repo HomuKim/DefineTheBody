@@ -19,13 +19,13 @@
 
 		<section class="trainers-grid">
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_ptteamleader">
-				<img src="images/trainer1-thumbnail.jpg" alt="트레이너 1" class="trainer-image">
-				<img src="images/trainer1-full.jpg" alt="트레이너 1 전체 사진" class="trainer-full-image"
+				<img src="images/PTLeader-thumbnail.jpg" alt="PT팀 리더" class="trainer-image">
+				<img src="images/PTLeader-full.jpg" alt="PT팀 리더 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_leader">
-				<img src="images/trainer2-thumbnail.jpg" alt="트레이너 2" class="trainer-image">
-				<img src="images/trainer2-full.jpg" alt="트레이너 2 전체 사진" class="trainer-full-image"
+				<img src="images/FCLeader-thumbnail.jpg" alt="FC팀 리더" class="trainer-image">
+				<img src="images/FCLeader-full.jpg" alt="FC팀 리더 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_kwon">
@@ -200,7 +200,12 @@
 				document.body.classList.add('admin-logged-in');
 				makeContentEditable(true);
 			}
-			$("#header").load("header.html");
+			$("#header").load("header.html", function () {
+				// 헤더 로드 완료 후 실행될 코드
+				if (typeof initializeHeader === 'function') {
+					initializeHeader();
+				}
+			});
 			$("#footer").load("footer.html");
 		});
 
