@@ -84,7 +84,7 @@
 
 	slides.forEach(slide => {
 		slide.onerror = function () {
-			this.style.display = 'none';
+			this.remove(); // 오류 발생 시 해당 이미지 요소를 제거
 		};
 	});
 
@@ -105,10 +105,20 @@
 		// footer.html 로드
 		$("#footer").load("footer.html");
 
-		// 슬라이드쇼 시작
-		showSlides();
+		// 이미지 로드 완료 후 슬라이드쇼 시작
+		Promise.all(Array.from(slides).map(img => {
+			if (img.complete) return Promise.resolve();
+			return new Promise(resolve => {
+				img.onload = resolve;
+				img.onerror = () => {
+					img.remove();
+					resolve();
+				};
+			});
+		})).then(() => {
+			showSlides();
+		});
 	});
-
 </script>
 </body>
 

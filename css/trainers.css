@@ -157,6 +157,7 @@
 	font-weight: bold;
 	transition: 0.3s;
 	cursor: pointer;
+	display: none;
 }
 
 .close:hover,
@@ -188,11 +189,11 @@
 }
 
 .prev-btn {
-	left: 450px;
+	left: 30%;
 }
 
 .next-btn {
-	right: 450px;
+	right: 30%;
 }
 
 /* 모달이 열린 후 버튼 표시 */
@@ -205,4 +206,121 @@
 .next-btn:hover {
 	background-color: transparent;
 	opacity: 1;
+}
+
+/* 반응형 스타일 추가 */
+@media (max-width: 1200px) {
+	.trainer-hero {
+		max-width: 95%;
+	}
+
+	.trainers-grid {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
+
+
+}
+
+@media (max-width: 768px) {
+	.trainer-hero h1 {
+		font-size: 36px;
+	}
+
+	.trainer-hero p {
+		font-size: 18px;
+	}
+
+	.trainers-grid {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	}
+
+	.trainer-card img {
+		height: 300px;
+	}
+
+	.modal {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.modal-content-container {
+		position: relative;
+		width: 90%;
+		max-width: 400px;
+	}
+
+	.modal-content {
+		width: 100%;
+		height: auto;
+		max-height: 80vh;
+		transition: transform 0.3s ease-out;
+	}
+
+	.modal-content.swiping {
+		transition: none;
+	}
+
+	.close {
+		top: 10px;
+		right: 20px;
+		font-size: 30px;
+		display: none;
+	}
+
+	.prev-btn,
+	.next-btn {
+		display: none;
+	}
+
+	@media (max-width: 480px) {
+		.trainer-hero h1 {
+			font-size: 28px;
+		}
+
+		.trainer-hero p {
+			font-size: 16px;
+		}
+
+		.trainers-grid {
+			grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+			gap: 10px;
+		}
+
+		.trainer-card img {
+			height: 200px;
+		}
+
+		.modal-content-container {
+			width: 95%;
+		}
+
+		.modal-content {
+			max-height: 70vh;
+		}
+
+		.instagram-button {
+			position: absolute;
+			bottom: 15px;
+			right: 15px;
+			z-index: 1001;
+		}
+
+		.instagram-icon {
+			width: 30px;
+			height: 30px;
+		}
+
+		.close {
+			top: 5px;
+			right: 10px;
+			font-size: 24px;
+			display: none;
+		}
+
+		.prev-btn,
+		.next-btn {
+			display: none;
+		}
+	}
 }

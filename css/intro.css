@@ -193,3 +193,88 @@
 	opacity: 1;
 	transition: opacity 0.5s ease-in;
 }
+
+/* 반응형 스타일 추가 */
+@media (max-width: 1200px) {
+  .intro-hero, .intro-gallery {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 992px) {
+  .intro-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-image, .intro-text {
+    flex: none;
+    width: 100%;
+  }
+
+  .main-image img {
+    max-height: 400px;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .intro-text {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-hero h1 {
+    font-size: 36px;
+  }
+
+  .intro-hero p {
+    font-size: 16px;
+  }
+
+  .intro-text h2 {
+    font-size: 28px;
+  }
+
+  .intro-text p {
+    font-size: 16px;
+  }
+
+  .intro-button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-hero h1 {
+    font-size: 28px;
+  }
+
+  .intro-hero p {
+    font-size: 14px;
+  }
+
+  .intro-text h2 {
+    font-size: 24px;
+  }
+
+  .intro-text p {
+    font-size: 14px;
+  }
+
+  .intro-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .intro-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .main-image img {
+    max-height: 505px;
+  }
+}

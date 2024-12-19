@@ -116,42 +116,54 @@
 			trainerCards.forEach(function (card, index) {
 				card.onclick = function () {
 					currentTrainerIndex = index;
-					modal.style.display = "flex";
-					modal.classList.add('active');
-					var fullImage = this.querySelector('.trainer-full-image');
-					modalImg.src = fullImage.src;
-					instagramLink.href = this.dataset.instagram;
-
-					modalImg.style.opacity = 0;
-					instagramLink.style.opacity = 0;
-					prevBtn.style.opacity = 0;
-					nextBtn.style.opacity = 0;
-
-					modalImg.onload = function () {
-						setTimeout(() => {
-							modalImg.style.opacity = 1;
-							instagramLink.style.opacity = 1;
-							prevBtn.style.opacity = 0.6;
-							nextBtn.style.opacity = 0.6;
-						}, 50);
-					};
+					openModal(this);
 				}
 			});
 
-			prevBtn.onclick = function (e) {
-				e.stopPropagation();
+			function openModal(card) {
+				modal.style.display = "flex";
+				modal.classList.add('active');
+				var fullImage = card.querySelector('.trainer-full-image');
+				modalImg.src = fullImage.src;
+				instagramLink.href = card.dataset.instagram;
+
+				modalImg.style.opacity = 0;
+				instagramLink.style.opacity = 0;
+				prevBtn.style.opacity = 0;
+				nextBtn.style.opacity = 0;
+
+				modalImg.onload = function () {
+					setTimeout(() => {
+						modalImg.style.opacity = 1;
+						instagramLink.style.opacity = 1;
+						prevBtn.style.opacity = 0.6;
+						nextBtn.style.opacity = 0.6;
+					}, 50);
+				};
+			}
+
+			function prevSlide() {
 				do {
 					currentTrainerIndex = (currentTrainerIndex - 1 + trainerCards.length) % trainerCards.length;
 				} while (trainerCards[currentTrainerIndex].style.display === 'none');
 				updateModalContent(trainerCards[currentTrainerIndex]);
 			}
 
-			nextBtn.onclick = function (e) {
-				e.stopPropagation();
+			function nextSlide() {
 				do {
 					currentTrainerIndex = (currentTrainerIndex + 1) % trainerCards.length;
 				} while (trainerCards[currentTrainerIndex].style.display === 'none');
 				updateModalContent(trainerCards[currentTrainerIndex]);
+			}
+
+			prevBtn.onclick = function (e) {
+				e.stopPropagation();
+				prevSlide();
+			}
+
+			nextBtn.onclick = function (e) {
+				e.stopPropagation();
+				nextSlide();
 			}
 
 			function updateModalContent(card) {
@@ -170,7 +182,15 @@
 				}, 300);
 			}
 
-			closeBtn.onclick = function () {
+			closeBtn.onclick = closeModal;
+
+			window.onclick = function (event) {
+				if (event.target == modal) {
+					closeModal();
+				}
+			}
+
+			function closeModal() {
 				modalImg.style.opacity = 0;
 				instagramLink.style.opacity = 0;
 				prevBtn.style.opacity = 0;
@@ -181,18 +201,34 @@
 				}, 500);
 			}
 
-			window.onclick = function (event) {
-				if (event.target == modal) {
-					modalImg.style.opacity = 0;
-					instagramLink.style.opacity = 0;
-					prevBtn.style.opacity = 0;
-					nextBtn.style.opacity = 0;
-					modal.classList.remove('active');
-					setTimeout(() => {
-						modal.style.display = "none";
-					}, 500);
+			// 모바일 스와이프 기능
+			let startX, moveX;
+			const modalContent = document.querySelector('.modal-content');
+
+			modalContent.addEventListener('touchstart', (e) => {
+				startX = e.touches[0].clientX;
+				modalContent.classList.add('swiping');
+			});
+
+			modalContent.addEventListener('touchmove', (e) => {
+				moveX = e.touches[0].clientX;
+				const diff = moveX - startX;
+				modalContent.style.transform = `translateX(${diff}px)`;
+			});
+
+			modalContent.addEventListener('touchend', (e) => {
+				modalContent.classList.remove('swiping');
+				const diff = moveX - startX;
+				if (Math.abs(diff) > 100) {
+					if (diff > 0) {
+						prevSlide();
+					} else {
+						nextSlide();
+					}
 				}
-			}
+				modalContent.style.transform = '';
+			});
+
 		});
 
 		window.addEventListener('load', function () {
