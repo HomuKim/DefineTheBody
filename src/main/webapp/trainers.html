@@ -79,7 +79,7 @@
 		<button class="next-btn">&gt;</button>
 	</div>
 	<script>
-		document.addEventListener('DOMContentLoaded', function () {
+		window.addEventListener('load', function () {
 			var modal = document.getElementById("imageModal");
 			var modalImg = document.getElementById("modalImage");
 			var instagramLink = document.getElementById("instagramLink");
@@ -88,6 +88,15 @@
 			const prevBtn = document.querySelector('.prev-btn');
 			const nextBtn = document.querySelector('.next-btn');
 			let currentTrainerIndex = 0;
+
+			function resetModal() {
+				modal.style.display = "none";
+				modal.classList.remove('active');
+				modalImg.src = '';
+				instagramLink.href = '';
+			}
+
+			resetModal();
 
 			// 이미지 존재 여부 확인 및 카드 표시/숨김 처리
 			trainerCards.forEach(card => {
@@ -121,25 +130,35 @@
 			});
 
 			function openModal(card) {
+				var fullImage = card.querySelector('.trainer-full-image');
+				if (fullImage.complete) {
+					showModal(fullImage);
+				} else {
+					fullImage.onload = function () {
+						showModal(fullImage);
+					};
+				}
+			}
+
+			function showModal(fullImage) {
 				modal.style.display = "flex";
 				modal.classList.add('active');
-				var fullImage = card.querySelector('.trainer-full-image');
 				modalImg.src = fullImage.src;
-				instagramLink.href = card.dataset.instagram;
+				instagramLink.href = fullImage.parentNode.dataset.instagram;
 
 				modalImg.style.opacity = 0;
 				instagramLink.style.opacity = 0;
 				prevBtn.style.opacity = 0;
 				nextBtn.style.opacity = 0;
 
-				modalImg.onload = function () {
-					setTimeout(() => {
-						modalImg.style.opacity = 1;
-						instagramLink.style.opacity = 1;
-						prevBtn.style.opacity = 0.6;
-						nextBtn.style.opacity = 0.6;
-					}, 50);
-				};
+				setTimeout(() => {
+					modalImg.style.opacity = 1;
+					instagramLink.style.opacity = 1;
+					prevBtn.style.opacity = 0.6;
+					nextBtn.style.opacity = 0.6;
+				}, 50);
+
+				document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
 			}
 
 			function prevSlide() {
@@ -198,6 +217,7 @@
 				modal.classList.remove('active');
 				setTimeout(() => {
 					modal.style.display = "none";
+					document.body.style.overflow = ''; // 스크롤 복원
 				}, 500);
 			}
 
@@ -211,6 +231,7 @@
 			});
 
 			modalContent.addEventListener('touchmove', (e) => {
+				e.preventDefault(); // 스크롤 방지
 				moveX = e.touches[0].clientX;
 				const diff = moveX - startX;
 				modalContent.style.transform = `translateX(${diff}px)`;
@@ -229,9 +250,6 @@
 				modalContent.style.transform = '';
 			});
 
-		});
-
-		window.addEventListener('load', function () {
 			if (sessionStorage.getItem('adminLoggedIn') === 'true') {
 				document.body.classList.add('admin-logged-in');
 				makeContentEditable(true);
@@ -244,7 +262,6 @@
 			});
 			$("#footer").load("footer.html");
 		});
-
 	</script>
 </body>
 
