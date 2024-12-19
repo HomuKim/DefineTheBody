@@ -172,15 +172,14 @@ header {
 
 	.nav-links {
 		position: fixed;
-		top: 0;
+		top: -7px;
 		right: -100%;
 		width: 80%;
 		max-width: 100px;
-		height: 23vh;
+		height: 25vh;
 		background-color: rgba(255, 255, 255, 0.7);
-		/* 투명도 조절 */
 		backdrop-filter: blur(10px);
-		padding: 5px 5px 5px 5px;
+		padding: 10px 10px 10px 3px;
 		transition: 0.3s ease-in-out;
 		z-index: 998;
 		flex-direction: column;
@@ -192,7 +191,7 @@ header {
 	}
 
 	.nav-links.active {
-		right: 0;
+		right: 17px;
 	}
 
 	.nav-links li {
