@@ -26,3 +26,48 @@ footer {
 .footer-content p {
 	margin: 10px 0;
 }
+
+@media (max-width: 768px) {
+	footer {
+		padding: 20px 15px;
+	}
+
+	.footer-content {
+		max-width: 100%;
+	}
+
+	.footer-content p {
+		font-size: 14px;
+		line-height: 1.6;
+		margin: 15px 0;
+	}
+}
+
+@media (max-width: 480px) {
+	footer {
+		padding: 15px 10px;
+	}
+
+	.footer-content p {
+		font-size: 12px;
+		line-height: 1.5;
+		margin: 12px 0;
+	}
+
+	.footer-content p:first-child {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.footer-content p:first-child::after {
+		content: '';
+		width: 30px;
+		height: 1px;
+	}
+
+	#adminLoginLink {
+		font-size: 11px;
+		margin-top: 20px;
+	}
+}

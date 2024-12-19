@@ -24,7 +24,7 @@
 			</div>
 			<div class="intro-content">
 				<div class="main-image">
-					<img id="mainImage" src="images/ceo.webp" alt="인사말 이미지" width="400" height="600">
+					<img id="mainImage" src="images/ceo.jpg" alt="인사말 이미지" width="400" height="600">
 				</div>
 				<div class="intro-text">
 					<h2 id="introTitle">CEO 인사말</h2>
@@ -99,7 +99,12 @@
 				document.body.classList.add('admin-logged-in');
 				makeContentEditable(true);
 			}
-			$("#header").load("header.html");
+			$("#header").load("header.html", function () {
+				// 헤더 로드 완료 후 실행될 코드
+				if (typeof initializeHeader === 'function') {
+					initializeHeader();
+				}
+			});
 			$("#footer").load("footer.html");
 		});
 	</script>
