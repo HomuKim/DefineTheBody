@@ -143,19 +143,15 @@
 			function showModal(fullImage) {
 				modal.style.display = "flex";
 				modal.classList.add('active');
-				modalImg.src = fullImage.src;
+				modalContent.src = fullImage.src;
 				instagramLink.href = fullImage.parentNode.dataset.instagram;
 
-				modalImg.style.opacity = 0;
+				modalContent.style.opacity = 0;
 				instagramLink.style.opacity = 0;
-				prevBtn.style.opacity = 0;
-				nextBtn.style.opacity = 0;
 
 				setTimeout(() => {
-					modalImg.style.opacity = 1;
+					modalContent.style.opacity = 1;
 					instagramLink.style.opacity = 1;
-					prevBtn.style.opacity = 0.6;
-					nextBtn.style.opacity = 0.6;
 				}, 50);
 
 				document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
@@ -223,22 +219,23 @@
 
 			// 모바일 스와이프 기능
 			let startX, moveX;
+			const modalContentContainer = document.querySelector('.modal-content-container');
 			const modalContent = document.querySelector('.modal-content');
 
-			modalContent.addEventListener('touchstart', (e) => {
+			modalContentContainer.addEventListener('touchstart', (e) => {
 				startX = e.touches[0].clientX;
-				modalContent.classList.add('swiping');
+				modalContentContainer.classList.add('swiping');
 			});
 
-			modalContent.addEventListener('touchmove', (e) => {
+			modalContentContainer.addEventListener('touchmove', (e) => {
 				e.preventDefault(); // 스크롤 방지
 				moveX = e.touches[0].clientX;
 				const diff = moveX - startX;
-				modalContent.style.transform = `translateX(${diff}px)`;
+				modalContentContainer.style.transform = `translateX(${diff}px)`;
 			});
 
-			modalContent.addEventListener('touchend', (e) => {
-				modalContent.classList.remove('swiping');
+			modalContentContainer.addEventListener('touchend', (e) => {
+				modalContentContainer.classList.remove('swiping');
 				const diff = moveX - startX;
 				if (Math.abs(diff) > 100) {
 					if (diff > 0) {
@@ -247,7 +244,7 @@
 						nextSlide();
 					}
 				}
-				modalContent.style.transform = '';
+				modalContentContainer.style.transform = '';
 			});
 
 			if (sessionStorage.getItem('adminLoggedIn') === 'true') {
