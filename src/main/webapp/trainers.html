@@ -19,48 +19,47 @@
 
 		<section class="trainers-grid">
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_ptteamleader">
-				<img src="images/PTLeader-thumbnail.jpg" alt="PT팀 리더" class="trainer-image">
-				<img src="images/PTLeader-full.jpg" alt="PT팀 리더 전체 사진" class="trainer-full-image"
-					style="display: none;">
+				<img src="images/member/trainer1-thumbnail.jpg?v=1" alt="트레이너 1" class="trainer-image">
+				<img src="images/member/trainer1-full.jpg?v=1" alt="트레이너1 전체 사진" class="trainer-full-image" style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_leader">
-				<img src="images/FCLeader-thumbnail.jpg" alt="FC팀 리더" class="trainer-image">
-				<img src="images/FCLeader-full.jpg" alt="FC팀 리더 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer2-thumbnail.jpg?v=1" alt="트레이너 2" class="trainer-image">
+				<img src="images/member/trainer2-full.jpg?v=1" alt="트레이너 2 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_kwon">
-				<img src="images/trainer3-thumbnail.jpg" alt="트레이너 3" class="trainer-image">
-				<img src="images/trainer3-full.jpg" alt="트레이너 3 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer3-thumbnail.jpg" alt="트레이너 3" class="trainer-image">
+				<img src="images/member/trainer3-full.jpg" alt="트레이너 3 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_hyun">
-				<img src="images/trainer4-thumbnail.jpg" alt="트레이너 4" class="trainer-image">
-				<img src="images/trainer4-full.jpg" alt="트레이너 4 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer4-thumbnail.jpg" alt="트레이너 4" class="trainer-image">
+				<img src="images/member/trainer4-full.jpg" alt="트레이너 4 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_han">
-				<img src="images/trainer5-thumbnail.jpg" alt="트레이너 5" class="trainer-image">
-				<img src="images/trainer5-full.jpg" alt="트레이너 5 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer5-thumbnail.jpg" alt="트레이너 5" class="trainer-image">
+				<img src="images/member/trainer5-full.jpg" alt="트레이너 5 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_wang">
-				<img src="images/trainer6-thumbnail.jpg" alt="트레이너 6" class="trainer-image">
-				<img src="images/trainer6-full.jpg" alt="트레이너 6 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer6-thumbnail.jpg" alt="트레이너 6" class="trainer-image">
+				<img src="images/member/trainer6-full.jpg" alt="트레이너 6 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_kim_">
-				<img src="images/trainer7-thumbnail.jpg" alt="트레이너 7" class="trainer-image">
-				<img src="images/trainer7-full.jpg" alt="트레이너 7 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer7-thumbnail.jpg" alt="트레이너 7" class="trainer-image">
+				<img src="images/member/trainer7-full.jpg" alt="트레이너 7 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/ri0___0ha">
-				<img src="images/trainer8-thumbnail.png" alt="트레이너 8" class="trainer-image">
-				<img src="images/trainer8-full.png" alt="트레이너 8 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer8-thumbnail.png" alt="트레이너 8" class="trainer-image">
+				<img src="images/member/trainer8-full.png" alt="트레이너 8 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/eu____b">
-				<img src="images/trainer9-thumbnail.jpg" alt="트레이너 9" class="trainer-image">
-				<img src="images/trainer9-full.png" alt="트레이너 9 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer9-thumbnail.jpg" alt="트레이너 9" class="trainer-image">
+				<img src="images/member/trainer9-full.png" alt="트레이너 9 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<!-- 필요에 따라 더 많은 트레이너 카드를 추가할 수 있습니다 -->
@@ -143,15 +142,19 @@
 			function showModal(fullImage) {
 				modal.style.display = "flex";
 				modal.classList.add('active');
-				modalContent.src = fullImage.src;
+				modalImg.src = fullImage.src;
 				instagramLink.href = fullImage.parentNode.dataset.instagram;
 
-				modalContent.style.opacity = 0;
+				modalImg.style.opacity = 0;
 				instagramLink.style.opacity = 0;
+				prevBtn.style.opacity = 0;
+				nextBtn.style.opacity = 0;
 
 				setTimeout(() => {
-					modalContent.style.opacity = 1;
+					modalImg.style.opacity = 1;
 					instagramLink.style.opacity = 1;
+					prevBtn.style.opacity = 1;
+					nextBtn.style.opacity = 1;
 				}, 50);
 
 				document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
@@ -225,6 +228,7 @@
 			modalContentContainer.addEventListener('touchstart', (e) => {
 				startX = e.touches[0].clientX;
 				modalContentContainer.classList.add('swiping');
+				instagramLink.style.opacity = '0'; // 스와이프 시작 시 인스타그램 버튼 숨김
 			});
 
 			modalContentContainer.addEventListener('touchmove', (e) => {
@@ -243,14 +247,12 @@
 					} else {
 						nextSlide();
 					}
+				} else {
+					instagramLink.style.opacity = '1'; // 스와이프가 취소되면 인스타그램 버튼 다시 표시
 				}
 				modalContentContainer.style.transform = '';
 			});
 
-			if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-				document.body.classList.add('admin-logged-in');
-				makeContentEditable(true);
-			}
 			$("#header").load("header.html", function () {
 				// 헤더 로드 완료 후 실행될 코드
 				if (typeof initializeHeader === 'function') {
