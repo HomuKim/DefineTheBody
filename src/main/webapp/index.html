@@ -50,60 +50,56 @@
 		</section>
 	</main>
 	<div id="footer"></div>
-</body>
-<script>
-	let slideIndex = 0;
-	const slides = document.querySelectorAll('.event-image');
+	<script>
+		let slideIndex = 0;
+		const slides = document.querySelectorAll('.event-image');
 
-	function filterValidImages() {
-		return Array.from(slides).filter(slide => {
-			return slide.complete && slide.naturalHeight !== 0;
-		});
-	}
-
-	function showSlides() {
-		const validSlides = filterValidImages();
-
-		if (validSlides.length === 0) return;
-
-		validSlides.forEach(slide => {
-			slide.style.display = "none";
-			slide.classList.remove('active');
-		});
-
-		slideIndex++;
-		if (slideIndex > validSlides.length) {
-			slideIndex = 1;
+		function filterValidImages() {
+			return Array.from(slides).filter(slide => {
+				return slide.complete && slide.naturalHeight !== 0;
+			});
 		}
 
-		validSlides[slideIndex - 1].style.display = "block";
-		validSlides[slideIndex - 1].classList.add('active');
+		function showSlides() {
+			const validSlides = filterValidImages();
 
-		setTimeout(showSlides, 7000);
-	}
+			if (validSlides.length === 0) return;
 
-	slides.forEach(slide => {
-		slide.onerror = function () {
-			this.remove(); // 오류 발생 시 해당 이미지 요소를 제거
-		};
-	});
+			validSlides.forEach(slide => {
+				slide.style.display = "none";
+				slide.classList.remove('active');
+			});
 
-	function makeContentEditable(editable) {
-		const editableElements = document.querySelectorAll('.editable');
-		editableElements.forEach(el => el.contentEditable = editable);
-	}
-
-	document.addEventListener('DOMContentLoaded', function () {
-		// header.html 로드
-		$("#header").load("header.html", function () {
-			// 헤더 로드 완료 후 실행될 코드
-			if (typeof initializeHeader === 'function') {
-				initializeHeader();
+			slideIndex++;
+			if (slideIndex > validSlides.length) {
+				slideIndex = 1;
 			}
+
+			validSlides[slideIndex - 1].style.display = "block";
+			validSlides[slideIndex - 1].classList.add('active');
+
+			setTimeout(showSlides, 7000);
+		}
+
+		slides.forEach(slide => {
+			slide.onerror = function () {
+				this.remove(); // 오류 발생 시 해당 이미지 요소를 제거
+			};
 		});
 
-		// footer.html 로드
-		$("#footer").load("footer.html");
+		function makeContentEditable(editable) {
+			const editableElements = document.querySelectorAll('.editable');
+			editableElements.forEach(el => el.contentEditable = editable);
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			$("#header").load("header.html", function () {
+				if (typeof initializeHeader === 'function') {
+					initializeHeader();
+				}
+			});
+			$("#footer").load("footer.html");
+		});
 
 		// 이미지 로드 완료 후 슬라이드쇼 시작
 		Promise.all(Array.from(slides).map(img => {
@@ -118,8 +114,7 @@
 		})).then(() => {
 			showSlides();
 		});
-	});
-</script>
+	</script>
 </body>
 
 </html>

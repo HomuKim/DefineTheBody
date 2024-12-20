@@ -1,7 +1,17 @@
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	line-height: 1.6;
+	background-color: #f5f5f7;
+}
+
 .intro-hero {
 	background-color: rgba(0, 0, 0, 0.6);
 	color: var(--pure-white);
 	text-align: center;
+	width: 100%;
 	padding: 3px 20px;
 	margin: 30px auto 30px auto;
 	/* 상 우 하 좌 마진 설정 */
@@ -15,6 +25,8 @@
 	border-radius: 20px;
 	/* 모서리를 둥글게 만듭니다 */
 }
+
+
 
 .intro-hero::before {
 	content: '';
@@ -196,85 +208,111 @@
 
 /* 반응형 스타일 추가 */
 @media (max-width: 1200px) {
-  .intro-hero, .intro-gallery {
-    max-width: 95%;
-  }
-}
+	.intro-gallery {
+		max-width: 900px;
+		padding: 0 20px;
+	}
 
-@media (max-width: 992px) {
-  .intro-content {
-    flex-direction: column;
-    align-items: center;
-  }
+	.intro-content {
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+	}
 
-  .main-image, .intro-text {
-    flex: none;
-    width: 100%;
-  }
+	.main-image {
+		flex: none;
+		width: 100%;
+		max-width: 580px;
+	}
 
-  .main-image img {
-    max-height: 400px;
-    width: auto;
-    margin: 0 auto;
-    display: block;
-  }
-
-  .intro-text {
-    padding: 20px;
-  }
+	.intro-text {
+		flex: none;
+		width: 100%;
+		max-width: 580px;
+		padding: 20px;
+	}
 }
 
 @media (max-width: 768px) {
-  .intro-hero h1 {
-    font-size: 36px;
-  }
+	.intro-hero {
+		min-height: 30vh;
+		margin: 20px auto;
+		padding: 30px 15px;
+	}
 
-  .intro-hero p {
-    font-size: 16px;
-  }
+	.intro-hero h1 {
+		font-size: 36px;
+		margin-bottom: 15px;
+	}
 
-  .intro-text h2 {
-    font-size: 28px;
-  }
+	.intro-hero p {
+		font-size: 16px;
+	}
 
-  .intro-text p {
-    font-size: 16px;
-  }
+	.intro-text h2 {
+		font-size: 28px;
+		margin-bottom: 15px;
+	}
 
-  .intro-button {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
+	.intro-text p {
+		font-size: 16px;
+		line-height: 1.6;
+	}
+
+	.intro-buttons {
+		gap: 10px;
+	}
+
+	.intro-button {
+		font-size: 14px;
+		padding: 6px 10px;
+	}
+
+	.text-container {
+		height: auto;
+	}
 }
 
 @media (max-width: 480px) {
-  .intro-hero h1 {
-    font-size: 28px;
-  }
+	.intro-hero {
+		min-height: 25vh;
+		margin: 15px auto;
+		padding: 20px 10px;
+	}
 
-  .intro-hero p {
-    font-size: 14px;
-  }
+	.intro-hero h1 {
+		font-size: 28px;
+		margin-bottom: 10px;
+	}
 
-  .intro-text h2 {
-    font-size: 24px;
-  }
+	.intro-hero p {
+		font-size: 14px;
+	}
 
-  .intro-text p {
-    font-size: 14px;
-  }
+	.intro-text {
+		padding: 15px;
+	}
 
-  .intro-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
+	.intro-text h2 {
+		font-size: 24px;
+		padding-bottom: 10px;
+	}
 
-  .intro-button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
+	.intro-text p {
+		font-size: 14px;
+		line-height: 1.5;
+	}
 
-  .main-image img {
-    max-height: 505px;
-  }
+	.intro-buttons {
+		flex-direction: column;
+		gap: 8px;
+		width: 100%;
+		padding: 0 20px;
+	}
+
+	.intro-button {
+		width: 100%;
+		padding: 8px;
+		text-align: center;
+	}
 }

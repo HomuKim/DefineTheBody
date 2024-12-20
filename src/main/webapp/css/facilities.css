@@ -1,3 +1,12 @@
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	line-height: 1.6;
+	background-color: #f5f5f7;
+}
+
 .facility-hero {
 	background-color: rgba(0, 0, 0, 0.6);
 	color: var(--pure-white);
@@ -152,4 +161,109 @@
 .thumbnail.active {
 	border: 2px solid var(--primary-color);
 	transform: scale(1.05);
+}
+
+/* 반응형 스타일 추가 */
+@media (max-width: 1200px) {
+    .facility-gallery {
+        padding: 15px;
+    }
+
+    .main-image {
+        height: 500px;
+    }
+
+    .thumbnail {
+        width: 120px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .facility-hero {
+        min-height: 30vh;
+        margin: 20px auto;
+        padding: 30px 15px;
+    }
+
+    .facility-hero h1 {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+
+    .facility-hero p {
+        font-size: 16px;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .main-image {
+        height: 400px;
+    }
+
+    .prev,
+    .next {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .thumbnail {
+        width: 100px;
+        height: 70px;
+    }
+
+    .thumbnails {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .facility-hero {
+        min-height: 25vh;
+        margin: 15px auto;
+        padding: 20px 10px;
+    }
+
+    .facility-hero h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .facility-hero p {
+        font-size: 14px;
+    }
+
+    .main-image {
+        height: 300px;
+        margin-bottom: 10px;
+    }
+
+    .prev,
+    .next {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+    .thumbnail {
+        width: 80px;
+        height: 60px;
+    }
+
+    .thumbnails {
+        gap: 5px;
+    }
+
+    .thumbnail-container {
+        padding: 5px 0;
+    }
 }
