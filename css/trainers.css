@@ -236,8 +236,8 @@ body {
 		height: auto;
 		min-height: 20vh;
 		margin: 30px auto;
-		padding: 30px 15px;
-		max-width: 100%;
+		padding: 46px 15px;
+		max-width: 95%;
 		box-sizing: border-box;
 
 	}
@@ -302,8 +302,8 @@ body {
 		.trainer-hero {
 			min-height: 20vh;
 			margin: 30px auto;
-			padding: 30px 10px;
-			max-width: 100%;
+			padding: 18px 10px;
+			max-width: 95%;
 			box-sizing: border-box;
 		}
 

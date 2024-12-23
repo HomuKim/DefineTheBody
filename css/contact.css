@@ -316,8 +316,8 @@ body {
 		height: auto;
 		min-height: 20vh;
 		margin: 30px auto;
-		padding: 30px 15px;
-		max-width: 100%;
+		padding: 61px 15px;
+		max-width: 95%;
 		box-sizing: border-box;
 	}
 
@@ -377,8 +377,8 @@ body {
 	.contact-hero {
 		min-height: 20vh;
 		margin: 30px auto;
-		padding: 30px 10px;
-		max-width: 100%;
+		padding: 33px 10px;
+		max-width: 95%;
 		box-sizing: border-box;
 	}
 
