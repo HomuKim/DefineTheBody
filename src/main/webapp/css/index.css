@@ -275,7 +275,7 @@ body {
 
 @media (max-width: 480px) {
 	.hero-section {
-		height: 30vh;
+		height: 20vh;
 		/* 더 작은 모바일 화면에서 높이를 40%로 조정 */
 	}
 

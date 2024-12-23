@@ -313,9 +313,16 @@ body {
 
 @media (max-width: 768px) {
 	.contact-hero {
-		min-height: 200px;
-		margin: 15px auto;
-		padding: 20px 15px;
+		height: auto;
+		min-height: 20vh;
+		margin: 30px auto;
+		padding: 30px 15px;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+
+	.contact-hero::before {
+		background-size: cover;
 	}
 
 	.contact-hero h1 {
@@ -368,8 +375,11 @@ body {
 
 @media (max-width: 480px) {
 	.contact-hero {
-		min-height: 150px;
-		margin: 10px auto;
+		min-height: 20vh;
+		margin: 30px auto;
+		padding: 30px 10px;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
 	.contact-hero h1 {

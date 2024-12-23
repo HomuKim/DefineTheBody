@@ -235,9 +235,16 @@ body {
 
 @media (max-width: 768px) {
 	.intro-hero {
-		min-height: 30vh;
-		margin: 20px auto;
+		height: auto;
+		min-height: 20vh;
+		margin: 30px auto;
 		padding: 30px 15px;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+
+	.intro-hero::before {
+		background-size: cover;
 	}
 
 	.intro-hero h1 {
@@ -275,9 +282,11 @@ body {
 
 @media (max-width: 480px) {
 	.intro-hero {
-		min-height: 25vh;
-		margin: 15px auto;
+		min-height: 20vh;
+		margin: 30px auto;
 		padding: 20px 10px;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
 	.intro-hero h1 {
@@ -304,15 +313,25 @@ body {
 	}
 
 	.intro-buttons {
-		flex-direction: column;
-		gap: 8px;
+		display: flex;
+		flex-direction: row;
+		/* 가로 배열 */
+		justify-content: center;
+		/* 가운데 정렬 */
+		align-items: center;
+		gap: 10px;
+		/* 버튼 사이의 간격 */
 		width: 100%;
 		padding: 0 20px;
 	}
 
 	.intro-button {
-		width: 100%;
-		padding: 8px;
+		width: auto;
+		/* 내용에 맞게 너비 조정 */
+		padding: 8px 15px;
+		/* 좌우 패딩 증가 */
 		text-align: center;
+		white-space: nowrap;
+		/* 텍스트가 줄바꿈되지 않도록 */
 	}
 }

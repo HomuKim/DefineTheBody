@@ -165,105 +165,114 @@ body {
 
 /* 반응형 스타일 추가 */
 @media (max-width: 1200px) {
-    .facility-gallery {
-        padding: 15px;
-    }
+	.facility-gallery {
+		padding: 15px;
+	}
 
-    .main-image {
-        height: 500px;
-    }
+	.main-image {
+		height: 500px;
+	}
 
-    .thumbnail {
-        width: 120px;
-        height: 80px;
-    }
+	.thumbnail {
+		width: 120px;
+		height: 80px;
+	}
 }
 
 @media (max-width: 768px) {
-    .facility-hero {
-        min-height: 30vh;
-        margin: 20px auto;
-        padding: 30px 15px;
-    }
+	.facility-hero {
+		height: auto;
+		min-height: 20vh;
+		margin: 30px auto;
+		padding: 30px 15px;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
 
-    .facility-hero h1 {
-        font-size: 36px;
-        margin-bottom: 15px;
-    }
+	.facility-hero::before {
+		background-size: cover;
+	}
 
-    .facility-hero p {
-        font-size: 16px;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
+	.facility-hero h1 {
+		font-size: 36px;
+		margin-bottom: 15px;
+	}
 
-    .main-image {
-        height: 400px;
-    }
+	.facility-hero p {
+		font-size: 16px;
+		max-width: 100%;
+		margin-bottom: 20px;
+	}
 
-    .prev,
-    .next {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-    }
+	.main-image {
+		height: 400px;
+	}
 
-    .thumbnail {
-        width: 100px;
-        height: 70px;
-    }
+	.prev,
+	.next {
+		width: 40px;
+		height: 40px;
+		font-size: 20px;
+	}
 
-    .thumbnails {
-        gap: 8px;
-    }
+	.thumbnail {
+		width: 100px;
+		height: 70px;
+	}
+
+	.thumbnails {
+		gap: 8px;
+	}
 }
 
 @media (max-width: 480px) {
-    .facility-hero {
-        min-height: 25vh;
-        margin: 15px auto;
-        padding: 20px 10px;
-    }
+	.facility-hero {
+		min-height: 20vh;
+		margin: 30px auto;
+		padding: 30px 10px;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
 
-    .facility-hero h1 {
-        font-size: 28px;
-        margin-bottom: 10px;
-    }
+	.facility-hero h1 {
+		font-size: 28px;
+		margin-bottom: 10px;
+	}
 
-    .facility-hero p {
-        font-size: 14px;
-    }
+	.facility-hero p {
+		font-size: 14px;
+	}
 
-    .main-image {
-        height: 300px;
-        margin-bottom: 10px;
-    }
+	.main-image {
+		height: 300px;
+		margin-bottom: 10px;
+	}
 
-    .prev,
-    .next {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-    }
+	.prev,
+	.next {
+		width: 35px;
+		height: 35px;
+		font-size: 16px;
+	}
 
-    .prev {
-        left: 10px;
-    }
+	.prev {
+		left: 10px;
+	}
 
-    .next {
-        right: 10px;
-    }
+	.next {
+		right: 10px;
+	}
 
-    .thumbnail {
-        width: 80px;
-        height: 60px;
-    }
+	.thumbnail {
+		width: 80px;
+		height: 60px;
+	}
 
-    .thumbnails {
-        gap: 5px;
-    }
+	.thumbnails {
+		gap: 5px;
+	}
 
-    .thumbnail-container {
-        padding: 5px 0;
-    }
+	.thumbnail-container {
+		padding: 5px 0;
+	}
 }
