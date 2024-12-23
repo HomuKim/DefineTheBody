@@ -240,7 +240,7 @@ body {
 
 .program-icons {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	margin-top: 20px;
 }
 
@@ -377,7 +377,7 @@ body {
 	.contact-hero {
 		min-height: 20vh;
 		margin: 30px auto;
-		padding: 33px 10px;
+		padding: 44px 10px;
 		max-width: 95%;
 		box-sizing: border-box;
 	}
