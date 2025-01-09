@@ -255,16 +255,24 @@
 			});
 
 			// 헤더와 푸터 로드
+			// 헤더 로드
 			fetch('header.html')
 				.then(response => response.text())
 				.then(data => {
 					document.getElementById('header').innerHTML = data;
+					// 스크립트 태그 내의 코드를 실행
+					const scriptTags = document.getElementById('header').getElementsByTagName('script');
+					for (let i = 0; i < scriptTags.length; i++) {
+						eval(scriptTags[i].innerText);
+					}
+					// initializeHeader 함수가 있다면 실행
 					if (typeof initializeHeader === 'function') {
 						initializeHeader();
 					}
 				})
 				.catch(error => console.error('Error loading header:', error));
 
+			// 푸터 로드
 			fetch('footer.html')
 				.then(response => response.text())
 				.then(data => {
