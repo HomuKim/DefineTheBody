@@ -7,8 +7,8 @@
 	<title>고객지원 - 디파인더바디 피트니스</title>
 	<link rel="stylesheet" href="css/contact.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<script async defer type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b2d7bc45d459112b899bcaad27de267e&autoload=false"></script>
+	<script type="text/javascript"
+		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=w4u0t9veg3"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -40,6 +40,10 @@
 							<h3>PT를 결제하면 회원권은 무료인가요?</h3>
 							<p>PT와 회원권은 별도로 결제하셔야 합니다.</p>
 						</li>
+						<li>
+							<h3>휴무일은 없나요?</h3>
+							<p>설, 추석 당일과 전날 365일중 총 4일 휴관합니다.</p>
+						</li>
 						<!-- 추가 FAQ 항목들 -->
 					</ul>
 				</div>
@@ -53,7 +57,7 @@
 							</div>
 							<h3>채팅 문의</h3>
 							<p>평일 06:00 - 24:00 / 주말 및 공휴일 10:00 - 20:00</p>
-							<p>설/추석 연휴 제외</p>
+							<p>설 / 추석 연휴 제외</p>
 						</div>
 
 						<div class="contact-item">
@@ -63,7 +67,7 @@
 							<h3>전화 문의</h3>
 							<p>010-7275-2477</p>
 							<p>평일 06:00 - 24:00 / 주말 및 공휴일 10:00 - 20:00</p>
-							<p>설/추석 연휴 제외</p>
+							<p>설 / 추석 연휴 제외</p>
 						</div>
 
 						<div class="contact-item" onclick="openMap()">
@@ -77,55 +81,47 @@
 				<div id="mapModal" class="modal">
 					<div class="modal-content">
 						<span class="close">&times;</span>
-						<div id="kakaoMap"></div>
+						<div id="naverMap"></div>
 					</div>
-				</div>
-
-				<div class="support-item">
-					<h2>이벤트 및 공지사항</h2>
-					<ul class="event-list">
-						<li>
-							<h3>신규 회원 특별 할인 이벤트</h3>
-							<p>PT를 등록하면 회원권을 드립니다!</p>
-						</li>
-						<li>
-							<h3>청소년들이여 운동하라!</h3>
-							<p>3개월권을 등록하시면 회원권 1개월과 회원복+PT 1회까지 증정!</p>
-						</li>
-						<!-- 추가 이벤트 및 공지사항 -->
-					</ul>
 				</div>
 				<div class="support-item">
 					<h2>운동 프로그램 안내</h2>
 					<div class="program-icons">
-						<div class="program-icon" onclick="openImageModal('images/pt.jpg')">
+						<div class="program-icon" onclick="openVideoModal('2IC2aFmZmhU')">
 							<i class="fas fa-dumbbell"></i>
 							<h3>1:1 퍼스널 트레이닝</h3>
-							<p>전문 트레이너와 함께하는 맞춤형 운동 프로그램</p>
+							<p>전문 트레이너와 함께하는 맞춤형 <br>운동 프로그램을 경험해보세요</p>
 						</div>
 
 						<div class="program-icon" onclick="openImageModal('images/pilates.jpg')">
 							<i class="fas fa-spa"></i>
 							<h3>1:1 필라테스</h3>
-							<p>코어 강화와 유연성 향상을 위한 전문 필라테스 프로그램</p>
+							<p>코어 강화와 유연성 향상을 위한 <br>전문 필라테스 프로그램을 경험해보세요</p>
 						</div>
 
 						<div class="program-icon">
 							<i class="fas fa-users"></i>
 							<h3>그룹 피트니스</h3>
-							<p>다양한 그룹 운동 클래스로 즐겁게 운동하세요</p>
+							<p>함께 운동하며 건강과 즐거움을 찾아가는 <br>여정을 경험해보세요</p>
 						</div>
 					</div>
 				</div>
 
 				<!-- 이미지 모달 -->
-				<div id="imageModal" class="modal image-modal">
-					<div class="modal-content image-modal-content">
-						<span class="close">&times;</span>
-						<img id="modalImage" src="" alt="프로그램 이미지">
-					</div>
-				</div>
+<!--				<div id="imageModal" class="modal image-modal">-->
+<!--					<div class="modal-content image-modal-content">-->
+<!--						<span class="close">&times;</span>-->
+<!--						<img id="modalImage" src="" alt="프로그램 이미지">-->
+<!--					</div>-->
+<!--				</div>-->
 			</div>
+<!--			<div id="videoModal" class="modal">-->
+<!--				<div class="modal-content">-->
+<!--					<span class="close">&times;</span>-->
+<!--					<iframe id="youtubePlayer" width="560" height="315" src="" frameborder="0"-->
+<!--						allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--				</div>-->
+<!--			</div>-->
 		</section>
 	</main>
 	<div id="footer"></div>
@@ -140,26 +136,23 @@
 			}, 10);
 
 			if (!map) {
-				kakao.maps.load(function () {
-					var lat = 37.6086138;
-					var lng = 127.0151611;
+				var lat = 37.6086138;
+				var lng = 127.0151611;
 
-					var container = document.getElementById('kakaoMap');
-					var options = {
-						center: new kakao.maps.LatLng(lat, lng),
-						level: 3
-					};
-					map = new kakao.maps.Map(container, options);
+				var mapOptions = {
+					center: new naver.maps.LatLng(lat, lng),
+					zoom: 15
+				};
 
-					var marker = new kakao.maps.Marker({
-						position: new kakao.maps.LatLng(lat, lng),
-						clickable: true
-					});
-					marker.setMap(map);
+				map = new naver.maps.Map('naverMap', mapOptions);
 
-					kakao.maps.event.addListener(marker, 'click', function () {
-						window.open("https://map.kakao.com/link/to/디파인더바디," + lat + "," + lng);
-					});
+				var marker = new naver.maps.Marker({
+					position: new naver.maps.LatLng(lat, lng),
+					map: map
+				});
+
+				naver.maps.Event.addListener(marker, 'click', function () {
+					window.open("https://map.naver.com/v5/search/디파인더바디짐/place/" + lat + "," + lng);
 				});
 			}
 		}
@@ -184,6 +177,38 @@
 				modal.classList.add('show');
 			}, 10);
 		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			var modal = document.getElementById("videoModal");
+			var player = document.getElementById("youtubePlayer");
+			var closeBtn = modal.querySelector('.close');
+
+			function openVideoModal(videoId) {
+				player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+				modal.style.display = "block";
+			}
+
+			function closeVideoModal() {
+				modal.style.display = "none";
+				player.src = "";  // 동영상 정지
+			}
+
+			// 클로즈 버튼 클릭 시 모달 닫기
+			if (closeBtn) {
+				closeBtn.onclick = closeVideoModal;
+			}
+
+			// 모달 외부 클릭 시 닫기
+			window.onclick = function (event) {
+				if (event.target == modal) {
+					closeVideoModal();
+				}
+			}
+
+			// openVideoModal 함수를 전역 스코프에 노출
+			window.openVideoModal = openVideoModal;
+		});
+
 
 		function closeImageModal() {
 			var modal = document.getElementById("imageModal");

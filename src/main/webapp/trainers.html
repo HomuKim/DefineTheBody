@@ -14,7 +14,7 @@
 	<main>
 		<section class="trainer-hero">
 			<h1>함께하는 피트니스 여정</h1>
-			<p>디파인더바디의 열정적인  스태프들을 만나보세요</p>
+			<p>디파인더바디의 열정적인 스태프들을 만나보세요</p>
 		</section>
 
 		<section class="trainers-grid">
@@ -60,7 +60,7 @@
 			</div>
 			<div class="trainer-card" data-instagram="https://www.instagram.com/eu____b">
 				<img src="images/member/trainer9-thumbnail.jpg" alt="트레이너 9" class="trainer-image">
-				<img src="images/member/trainer9-full.png" alt="트레이너 9 전체 사진" class="trainer-full-image"
+				<img src="images/member/trainer9-full.jpg" alt="트레이너 9 전체 사진" class="trainer-full-image"
 					style="display: none;">
 			</div>
 			<!-- 필요에 따라 더 많은 트레이너 카드를 추가할 수 있습니다 -->
@@ -119,7 +119,8 @@
 						if (!thumbnailExists || !fullExists) {
 							card.style.display = 'none';
 						}
-					});
+					})
+					.catch(error => console.error('Error checking images:', error));
 			});
 
 			trainerCards.forEach(function (card, index) {
@@ -131,6 +132,7 @@
 
 			function openModal(card) {
 				var fullImage = card.querySelector('.trainer-full-image');
+
 				if (fullImage.complete) {
 					showModal(fullImage);
 				} else {
@@ -158,7 +160,7 @@
 					nextBtn.style.opacity = 1;
 				}, 50);
 
-				document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+				document.body.style.overflow = 'hidden';
 			}
 
 			function prevSlide() {
@@ -217,23 +219,21 @@
 				modal.classList.remove('active');
 				setTimeout(() => {
 					modal.style.display = "none";
-					document.body.style.overflow = ''; // 스크롤 복원
+					document.body.style.overflow = '';
 				}, 500);
 			}
 
 			// 모바일 스와이프 기능
 			let startX, moveX;
 			const modalContentContainer = document.querySelector('.modal-content-container');
-			const modalContent = document.querySelector('.modal-content');
 
 			modalContentContainer.addEventListener('touchstart', (e) => {
 				startX = e.touches[0].clientX;
 				modalContentContainer.classList.add('swiping');
-				instagramLink.style.opacity = '0'; // 스와이프 시작 시 인스타그램 버튼 숨김
+				instagramLink.style.opacity = '0';
 			});
 
 			modalContentContainer.addEventListener('touchmove', (e) => {
-				e.preventDefault(); // 스크롤 방지
 				moveX = e.touches[0].clientX;
 				const diff = moveX - startX;
 				modalContentContainer.style.transform = `translateX(${diff}px)`;
@@ -249,18 +249,28 @@
 						nextSlide();
 					}
 				} else {
-					instagramLink.style.opacity = '1'; // 스와이프가 취소되면 인스타그램 버튼 다시 표시
+					instagramLink.style.opacity = '1';
 				}
 				modalContentContainer.style.transform = '';
 			});
 
-			$("#header").load("header.html", function () {
-				// 헤더 로드 완료 후 실행될 코드
-				if (typeof initializeHeader === 'function') {
-					initializeHeader();
-				}
-			});
-			$("#footer").load("footer.html");
+			// 헤더와 푸터 로드
+			fetch('header.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('header').innerHTML = data;
+					if (typeof initializeHeader === 'function') {
+						initializeHeader();
+					}
+				})
+				.catch(error => console.error('Error loading header:', error));
+
+			fetch('footer.html')
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById('footer').innerHTML = data;
+				})
+				.catch(error => console.error('Error loading footer:', error));
 		});
 	</script>
 </body>
