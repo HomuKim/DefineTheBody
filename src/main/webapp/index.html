@@ -2,6 +2,7 @@
 <html lang="ko">
 
 <head>
+	<!-- 문서의 메타 정보 및 외부 리소스 링크 -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>디파인더바디 피트니스</title>
@@ -10,8 +11,11 @@
 </head>
 
 <body>
+	<!-- 헤더 영역 (외부 파일에서 로드) -->
 	<div id="header"></div>
+
 	<main>
+		<!-- 히어로 섹션: 메인 콘텐츠 소개 -->
 		<section class="hero-section">
 			<div class="hero-content">
 				<h1 class="editable" contenteditable="false">건강한 삶을 시작하세요</h1>
@@ -20,7 +24,10 @@
 					class="cta-button editable" contenteditable="false">지금 방문하기</a>
 			</div>
 		</section>
+
+		<!-- 콘텐츠 섹션: 이벤트 배너 및 기능 카드 -->
 		<section class="content-section">
+			<!-- 이벤트 배너 슬라이더 -->
 			<div class="event-banner">
 				<div class="slider">
 					<img src="images/event/event-banner1.png" alt="이벤트 배너1" class="event-image editable">
@@ -29,6 +36,8 @@
 					<img src="images/event/event-banner4.jpg" alt="이벤트 배너4" class="event-image editable">
 				</div>
 			</div>
+
+			<!-- 기능 카드: 각 페이지로 연결되는 링크 -->
 			<div class="feature-cards">
 				<a href="event.html" class="card">
 					<h3 class="editable" contenteditable="false">이벤트</h3>
@@ -49,27 +58,35 @@
 			</div>
 		</section>
 	</main>
+
+	<!-- 푸터 영역 (외부 파일에서 로드) -->
 	<div id="footer"></div>
+
 	<script>
+		// 슬라이드 인덱스 초기화
 		let slideIndex = 0;
 		const slides = document.querySelectorAll('.event-image');
 
+		// 유효한 이미지만 필터링하는 함수
 		function filterValidImages() {
 			return Array.from(slides).filter(slide => {
 				return slide.complete && slide.naturalHeight !== 0;
 			});
 		}
 
+		// 슬라이드쇼 기능
 		function showSlides() {
 			const validSlides = filterValidImages();
 
 			if (validSlides.length === 0) return;
 
+			// 모든 슬라이드 숨기기
 			validSlides.forEach(slide => {
 				slide.style.display = "none";
 				slide.classList.remove('active');
 			});
 
+			// 다음 슬라이드 표시
 			slideIndex++;
 			if (slideIndex > validSlides.length) {
 				slideIndex = 1;
@@ -78,21 +95,26 @@
 			validSlides[slideIndex - 1].style.display = "block";
 			validSlides[slideIndex - 1].classList.add('active');
 
+			// 7초 후 다음 슬라이드로 전환
 			setTimeout(showSlides, 7000);
 		}
 
+		// 이미지 로드 오류 처리
 		slides.forEach(slide => {
 			slide.onerror = function () {
 				this.remove(); // 오류 발생 시 해당 이미지 요소를 제거
 			};
 		});
 
+		// 콘텐츠 편집 가능 상태 변경 함수
 		function makeContentEditable(editable) {
 			const editableElements = document.querySelectorAll('.editable');
 			editableElements.forEach(el => el.contentEditable = editable);
 		}
 
+		// DOM 로드 완료 시 실행되는 함수
 		document.addEventListener('DOMContentLoaded', function () {
+			// 헤더와 푸터 로드
 			$("#header").load("header.html", function () {
 				if (typeof initializeHeader === 'function') {
 					initializeHeader();
