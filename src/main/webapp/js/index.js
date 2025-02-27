@@ -79,3 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			showSlides();
 		});
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	if (typeof App !== 'undefined' && document.getElementById('react-root')) {
+		ReactDOM.render(React.createElement(App), document.getElementById('react-root'));
+	}
+});
