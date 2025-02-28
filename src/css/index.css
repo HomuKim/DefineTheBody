@@ -23,7 +23,7 @@ body {
 .hero-section {
 	text-align: center;
 	padding: 50px 20px;
-	background-image: url('../../images/logo.png');
+	background-image: url('/images/logo.png');
 	background-size: 50%;
 	background-position: center;
 	background-repeat: no-repeat;
