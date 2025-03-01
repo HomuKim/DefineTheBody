@@ -68,7 +68,7 @@ module.exports = {
 				publicPath: '/'
 			}
 		],
-		port: 3008,
+		port: 3009,
 		open: true,
 	},
 

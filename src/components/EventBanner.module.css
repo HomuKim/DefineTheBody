@@ -1,26 +1,35 @@
 .eventBanner {
-	width: 100%;
-	height: 0;
-	padding-bottom: 66.67%;
-	/* 3:2 비율 유지 */
 	position: relative;
+	width: 580px;
+	height: 30px;
+	padding-bottom: 66.67%;
+	border-radius: 15px;
 	overflow: hidden;
+	box-shadow: 0 4px 12px var(--shadow-color);
+	background-color: #f0f0f0;
 }
 
-.eventBanner img {
+.eventImage {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
-	transition: opacity 1s ease-in-out;
+	object-fit: contain;
 }
 
-.eventBanner img:not(:first-child) {
-	opacity: 0;
+
+.active {
+	display: block;
+	animation: fadeSlide 1s ease-in-out;
 }
 
-.eventBanner img.active {
-	opacity: 1;
+@keyframes fadeSlide {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
 }
