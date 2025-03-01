@@ -20,10 +20,9 @@ const Home = () => {
 
 			{/* 콘텐츠 섹션: 이벤트 배너 및 기능 카드 */}
 			<section className="content-section">
+				
 				{/* 이벤트 배너 슬라이더 */}
-				<div className="event-banner">
 					<EventBanner />
-				</div>
 
 				{/* 기능 카드: 각 페이지로 연결되는 링크 */}
 				<div className="feature-cards">

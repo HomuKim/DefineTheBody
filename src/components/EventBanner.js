@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styles from './EventBanner.module.css';
+import * as styles from './EventBanner.module.css';
 
-console.log('Loaded styles:', styles); // 스타일 객체 로깅
+console.log('Styles:', styles);
 
 const EventBanner = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
@@ -45,32 +45,33 @@ const EventBanner = () => {
 		setImageError(true);
 	};
 
-	// styles 객체가 undefined일 경우를 대비한 안전한 클래스 이름 생성
 	const safeClassName = (className) => styles ? styles[className] || '' : '';
 
 	if (imageUrls.length === 0) {
-		return <div className={safeClassName('eventBanner')}>No images available</div>;
+		return <div className={`eventBanner ${safeClassName('container')}`}>No images available</div>;
 	}
 
 	if (!imagesLoaded && !imageError) {
-		return <div className={safeClassName('eventBanner')}>Loading...</div>;
+		return <div className={`eventBanner ${safeClassName('container')}`}>Loading...</div>;
 	}
 
 	return (
-		<div className={safeClassName('eventBanner')}>
-			{imageError ? (
-				<div>Error loading image</div>
-			) : (
-				imageUrls.map((url, index) => (
-					<img
-						key={url}
-						src={url}
-						alt={`Event Banner ${index + 1}`}
-						onError={handleImageError}
-						className={currentSlide === index ? safeClassName('active') : ''}
-					/>
-				))
-			)}
+		<div className={styles.eventBanner}>
+			<div className={styles.slider}>
+				{imageError ? (
+					<div>Error loading image</div>
+				) : (
+					imageUrls.map((url, index) => (
+						<img
+							key={url}
+							src={url}
+							alt={`Event Banner ${index + 1}`}
+							onError={handleImageError}
+							className={`${styles.image} ${currentSlide === index ? styles.active : ''}`}
+						/>
+					))
+				)}
+			</div>
 		</div>
 	);
 };
