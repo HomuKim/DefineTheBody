@@ -62,7 +62,7 @@ const Header = () => {
 					<ul className="nav-links" ref={navLinksRef}>
 						<li><a href="/">홈</a></li>
 						<li><a href="intro.html">인사말</a></li>
-						<li><a href="trainers.html">팀원소개</a></li>
+						<li><a href="trainers">팀원소개</a></li>
 						<li><a href="facilities.html">시설소개</a></li>
 						<li><a href="contact.html">고객지원</a></li>
 					</ul>

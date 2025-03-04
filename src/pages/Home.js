@@ -33,7 +33,7 @@ const Home = () => {
 							다양한 이벤트와 프로모션을 확인하세요
 						</p>
 					</a>
-					<a href="trainers.html" className="card">
+					<a href="Trainers" className="card">
 						<h3 className="editable">팀원 소개</h3>
 						<p className="editable">
 							디파인더바디의 <br />

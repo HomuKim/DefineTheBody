@@ -70,6 +70,7 @@ module.exports = {
 		],
 		port: 3009,
 		open: true,
+		historyApiFallback: true,
 	},
 
 	resolve: {

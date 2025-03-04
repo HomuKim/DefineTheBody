@@ -147,7 +147,7 @@ body {
 
 /* 모달 스타일 */
 .modal {
-	display: none;
+	display: flex;
 	position: fixed;
 	z-index: 1000;
 	left: 0;
@@ -158,11 +158,14 @@ body {
 	background-color: rgba(0, 0, 0, 0.9);
 	align-items: center;
 	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease-in-out;
 }
 
 .modal-content {
-	max-width: 98%;
-	max-height: 100vh;
+	max-width: 90%;
+	max-height: 90vh;
 	object-fit: contain;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
@@ -182,7 +185,7 @@ body {
 	font-weight: bold;
 	transition: 0.3s;
 	cursor: pointer;
-	display: none;
+	z-index: 1002;
 }
 
 .close:hover,
@@ -224,7 +227,7 @@ body {
 /* 모달이 열린 후 버튼 표시 */
 .modal.active .prev-btn,
 .modal.active .next-btn {
-	opacity: 0.6;
+	opacity: 1;
 }
 
 .prev-btn:hover,
