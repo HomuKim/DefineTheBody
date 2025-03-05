@@ -113,12 +113,12 @@ body {
 
 .instagram-button {
 	position: absolute;
-	bottom: 30px;
+	bottom: 20px;
 	/* 모달 이미지의 아래쪽에 배치 */
-	right: 30px;
+	right: 20px;
 	/* 모달 이미지의 오른쪽에 배치 */
-	z-index: 1001;
-	opacity: 0;
+	z-index: 10001;
+	opacity: 1;
 	transition: opacity 0.3s ease-in-out;
 }
 
@@ -128,28 +128,12 @@ body {
 	height: 40px;
 }
 
-/*.youtube-button {*/
-/*	position: absolute;*/
-/*	bottom: 80px;*/
-/*	 모달 이미지의 아래쪽에 배치 */
-/*	right: 30px;*/
-/*	 모달 이미지의 오른쪽에 배치 */
-/*	z-index: 1001;*/
-/*	opacity: 0;*/
-/*	transition: opacity 0.3s ease-in-out;*/
-/*}*/
-
-/*.youtube-icon {*/
-/*	width: 40px;*/
-/*	height: 40px;*/
-/*}*/
-
 
 /* 모달 스타일 */
 .modal {
 	display: flex;
 	position: fixed;
-	z-index: 1000;
+	z-index: 10000 !important;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -158,14 +142,14 @@ body {
 	background-color: rgba(0, 0, 0, 0.9);
 	align-items: center;
 	justify-content: center;
-	opacity: 0;
-	pointer-events: none;
+	opacity: 1 !important;
+	pointer-events: auto;
 	transition: opacity 0.3s ease-in-out;
 }
 
 .modal-content {
-	max-width: 90%;
-	max-height: 90vh;
+	max-width: 100%;
+	max-height: 100vh;
 	object-fit: contain;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
@@ -174,6 +158,15 @@ body {
 .modal-content-container {
 	position: relative;
 	display: inline-block;
+}
+
+.modal-content.fading {
+	opacity: 0;
+}
+
+.modal-content.active {
+	opacity: 1;
+	transform: translateX(0);
 }
 
 .close {
@@ -308,7 +301,7 @@ body {
 		top: 10px;
 		right: 20px;
 		font-size: 30px;
-		display: none;
+		/*		display: none;*/
 	}
 
 	.prev-btn,
