@@ -54,14 +54,54 @@ body {
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+#admin-section {
+	margin: 40px auto;
+	text-align: center;
+}
+
+.admin-grid {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.admin-card {
+	width: 200px;
+	text-align: center;
+}
+
+.admin-image {
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+}
+
+.admin-name {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
 .trainers-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 20px;
 	max-width: 1200px;
-	margin: 0 auto;
+	margin: 40 auto;
 	padding: 0 20px;
 	margin-bottom: 60px;
+	text-align: center;
+}
+
+.trainers-grid h2 {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.trainer-cards-container {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(200px, 1fr));
+	gap: 20px;
 }
 
 .trainer-card {
@@ -71,11 +111,9 @@ body {
 	box-shadow: 0 4px 8px var(--shadow-color);
 	cursor: pointer;
 	transition: transform 0.3s ease;
-	/* 카드 자체의 움직임을 부드럽게 */
 	line-height: 0;
-	/* 이미지 아래 여백 제거 */
 	font-size: 0;
-	/* 텍스트로 인한 여백 제거 */
+	background-color: #fff;
 }
 
 
@@ -92,7 +130,6 @@ body {
 	height: 400px;
 	object-fit: cover;
 	display: block;
-	/* 이미지 아래 여백 제거 */
 }
 
 .trainer-image {
@@ -100,7 +137,6 @@ body {
 	height: 400px;
 	object-fit: cover;
 	transition: transform 0.3s ease;
-	/* 이미지 확대 효과를 부드럽게 */
 }
 
 .trainer-info h2 {
@@ -128,23 +164,6 @@ body {
 	height: 40px;
 }
 
-/*.youtube-button {*/
-/*	position: absolute;*/
-/*	bottom: 80px;*/
-/*	 모달 이미지의 아래쪽에 배치 */
-/*	right: 30px;*/
-/*	 모달 이미지의 오른쪽에 배치 */
-/*	z-index: 1001;*/
-/*	opacity: 0;*/
-/*	transition: opacity 0.3s ease-in-out;*/
-/*}*/
-
-/*.youtube-icon {*/
-/*	width: 40px;*/
-/*	height: 40px;*/
-/*}*/
-
-
 /* 모달 스타일 */
 .modal {
 	display: none;
@@ -171,6 +190,37 @@ body {
 .modal-content-container {
 	position: relative;
 	display: inline-block;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trainer-info {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.trainer-info h3 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.trainer-info p {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+#modalProfileImage {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	margin-bottom: 20px;
+}
+
+#modalReviewImage {
+	width: 100%;
+	height: auto;
+	margin: 20px 0;
 }
 
 .close {
