@@ -1,221 +1,84 @@
-window.addEventListener('load', function() {
-	var modal = document.getElementById("imageModal");
-	var modalImg = document.getElementById("modalImage");
-	var instagramLink = document.getElementById("instagramLink");
-	var closeBtn = document.getElementsByClassName("close")[0];
-	var trainerCards = document.querySelectorAll('.trainer-card');
-	const prevBtn = document.querySelector('.prev-btn');
-	const nextBtn = document.querySelector('.next-btn');
-	let currentTrainerIndex = 0;
+$(document).ready(function() {
+	// 1. 헤더와 푸터 로드
+	loadHeaderFooter();
 
-	function resetModal() {
-		modal.style.display = "none";
-		modal.classList.remove('active');
-		modalImg.src = '';
-		instagramLink.href = '';
-	}
+	// 2. 트레이너 카드 클릭 시 모달 창 열기
+	$('.trainer-card').on('click', openModal);
 
-	resetModal();
+	// 3. 모달 창 닫기
+	$('.close').on('click', closeModal);
+	$('#imageModal').on('click', closeModalBackground);
 
-	// 이미지 존재 여부 확인 및 카드 표시/숨김 처리
-	trainerCards.forEach(card => {
-		const thumbnailImg = card.querySelector('.trainer-image');
-		const fullImg = card.querySelector('.trainer-full-image');
-
-		function checkImage(img) {
-			return new Promise((resolve) => {
-				if (img.complete) {
-					resolve(img.naturalHeight !== 0);
-				} else {
-					img.onload = () => resolve(true);
-					img.onerror = () => resolve(false);
-				}
-			});
-		}
-
-		Promise.all([checkImage(thumbnailImg), checkImage(fullImg)])
-			.then(([thumbnailExists, fullExists]) => {
-				if (!thumbnailExists || !fullExists) {
-					card.style.display = 'none';
-				}
-			})
-			.catch(error => console.error('Error checking images:', error));
-	});
-
-	trainerCards.forEach(function(card, index) {
-		card.onclick = function() {
-			currentTrainerIndex = index;
-			openModal(this);
-		}
-	});
-
-	function openModal(card) {
-		var fullImage = card.querySelector('.trainer-full-image');
-
-		if (fullImage.complete) {
-			showModal(fullImage, card);
-		} else {
-			fullImage.onload = function() {
-				showModal(fullImage, card);
-			};
-		}
-	}
-
-	function showModal(fullImage, card) {
-		modal.style.display = "flex";
-		modal.classList.add('active');
-		modalImg.src = fullImage.src;
-		instagramLink.href = card.dataset.instagram;
-
-		updateModalContent(card); // 정보 업데이트
-
-		modalImg.style.opacity = 0;
-		instagramLink.style.opacity = 0;
-		prevBtn.style.opacity = 0;
-		nextBtn.style.opacity = 0;
-
-		setTimeout(() => {
-			modalImg.style.opacity = 1;
-			instagramLink.style.opacity = 1;
-			prevBtn.style.opacity = 1;
-			nextBtn.style.opacity = 1;
-		}, 50);
-
-		document.body.style.overflow = 'hidden';
-	}
-
-	function prevSlide() {
-		do {
-			currentTrainerIndex = (currentTrainerIndex - 1 + trainerCards.length) % trainerCards.length;
-		} while (trainerCards[currentTrainerIndex].style.display === 'none');
-		updateModalContent(trainerCards[currentTrainerIndex]);
-	}
-
-	function nextSlide() {
-		do {
-			currentTrainerIndex = (currentTrainerIndex + 1) % trainerCards.length;
-		} while (trainerCards[currentTrainerIndex].style.display === 'none');
-		updateModalContent(trainerCards[currentTrainerIndex]);
-	}
-
-	prevBtn.onclick = function(e) {
-		e.stopPropagation();
-		prevSlide();
-	}
-
-	nextBtn.onclick = function(e) {
-		e.stopPropagation();
-		nextSlide();
-	}
-
-	// 모달창에 트레이너 정보 업데이트하는 함수
-	function updateModalContent(card) {
-		modalImg.style.opacity = 0;
-		instagramLink.style.opacity = 0;
-
-		setTimeout(() => {
-			var fullImage = card.querySelector('.trainer-full-image');
-			modalImg.src = fullImage.src;
-			instagramLink.href = card.dataset.instagram;
-
-			// 트레이너 정보 동적 업데이트
-			var trainerName = card.querySelector('.trainer-name').textContent;
-			var profileImage = card.querySelector('.trainer-profile-image').src;
-			var trainerCareer = card.querySelector('.trainer-career').textContent;
-			var trainerCertification = card.querySelector('.trainer-certification').textContent;
-			var reviewImage = card.querySelector('.trainer-review-image').src;
-			var trainerSocial = card.querySelector('.trainer-social').textContent;
-
-			document.getElementById('trainerName').textContent = trainerName;
-			document.getElementById('modalProfileImage').src = profileImage;
-			document.getElementById('trainerCareer').textContent = trainerCareer;
-			document.getElementById('trainerCertification').textContent = trainerCertification;
-			document.getElementById('modalReviewImage').src = reviewImage;
-			document.getElementById('trainerSocial').textContent = trainerSocial;
-
-			modalImg.onload = function() {
-				modalImg.style.opacity = 1;
-				instagramLink.style.opacity = 1;
-			};
-		}, 300);
-	}
-
-
-
-	closeBtn.onclick = closeModal;
-
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			closeModal();
-		}
-	}
-
-	function closeModal() {
-		modalImg.style.opacity = 0;
-		instagramLink.style.opacity = 0;
-		prevBtn.style.opacity = 0;
-		nextBtn.style.opacity = 0;
-		modal.classList.remove('active');
-		setTimeout(() => {
-			modal.style.display = "none";
-			document.body.style.overflow = '';
-		}, 500);
-	}
-
-	// 모바일 스와이프 기능
-	let startX, moveX;
-	const modalContentContainer = document.querySelector('.modal-content-container');
-
-	modalContentContainer.addEventListener('touchstart', (e) => {
-		startX = e.touches[0].clientX;
-		modalContentContainer.classList.add('swiping');
-		instagramLink.style.opacity = '0';
-	});
-
-	modalContentContainer.addEventListener('touchmove', (e) => {
-		moveX = e.touches[0].clientX;
-		const diff = moveX - startX;
-		modalContentContainer.style.transform = `translateX(${diff}px)`;
-	});
-
-	modalContentContainer.addEventListener('touchend', (e) => {
-		modalContentContainer.classList.remove('swiping');
-		const diff = moveX - startX;
-		if (Math.abs(diff) > 100) {
-			if (diff > 0) {
-				prevSlide();
-			} else {
-				nextSlide();
-			}
-		} else {
-			instagramLink.style.opacity = '1';
-		}
-		modalContentContainer.style.transform = '';
-	});
-
-	// 헤더와 푸터 로드
-	// 헤더 로드
-	fetch('header.html')
-		.then(response => response.text())
-		.then(data => {
-			document.getElementById('header').innerHTML = data;
-			// 스크립트 태그 내의 코드를 실행
-			const scriptTags = document.getElementById('header').getElementsByTagName('script');
-			for (let i = 0; i < scriptTags.length; i++) {
-				eval(scriptTags[i].innerText);
-			}
-			// initializeHeader 함수가 있다면 실행
-			if (typeof initializeHeader === 'function') {
-				initializeHeader();
-			}
-		})
-		.catch(error => console.error('Error loading header:', error));
-
-	// 푸터 로드
-	fetch('footer.html')
-		.then(response => response.text())
-		.then(data => {
-			document.getElementById('footer').innerHTML = data;
-		})
-		.catch(error => console.error('Error loading footer:', error));
+	// 4. 모달 탭 전환
+	$('.trainer-item').on('click', switchTab);
 });
+
+// 헤더와 푸터 로드 함수
+function loadHeaderFooter() {
+	$('#header').load('header.html', function() {
+		if (typeof initializeHeader === 'function') {
+			initializeHeader();
+		}
+	});
+	$('#footer').load('footer.html');
+}
+
+// 모달 열기 함수
+function openModal(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	const trainerCard = $(this);
+	const modal = $('#imageModal');
+
+	const trainerName = trainerCard.find('.trainer-name').text() || '트레이너 이름 없음';
+	const profileImage = trainerCard.find('.trainer-profile-image').attr('src') || '기본 프로필 이미지 경로';
+	const career = trainerCard.find('.trainer-career').text() || '경력 정보 없음';
+	const certification = trainerCard.find('.trainer-certification').text() || '자격증 정보 없음';
+	const reviewImage = trainerCard.find('.trainer-review-image').attr('src') || '기본 후기 이미지 경로';
+	const instagramLink = trainerCard.data('instagram') || '';
+
+	$('#trainerName').text(trainerName);
+	$('#modalProfileImage').attr('src', profileImage);
+	$('#trainerCareer').text(career);
+	$('#trainerCertification').text(certification);
+	$('#modalReviewImage').attr('src', reviewImage);
+	$('#instagramLink').attr('href', instagramLink);
+
+	// 1번 탭 활성화 및 내용 표시
+	$('.trainer-item').removeClass('active');
+	$('.trainer-item[data-trainer="1"]').addClass('active');
+	$('.modal-content-container > div').hide();
+	$('.modal-content-container > div[data-trainer="1"]').show();
+
+	modal.show();
+}
+
+// 모달 닫기 함수
+function closeModal() {
+	$('#imageModal').hide();
+	// 모달 창을 닫을 때 초기화
+	$('.trainer-item').removeClass('active');
+	$('.trainer-item[data-trainer="1"]').addClass('active');
+	$('.modal-content-container > div').hide();
+	$('.modal-content-container > div[data-trainer="1"]').show();
+}
+
+
+function closeModalBackground(e) {
+	if ($(e.target).is('#imageModal')) {
+		closeModal();
+	} else {
+		e.stopPropagation();
+	}
+}
+
+// 탭 전환 함수
+function switchTab() {
+	$('.trainer-item').removeClass('active');
+	$(this).addClass('active');
+
+	const tabIndex = $(this).data('trainer');
+	$('.modal-content-container > div').hide();
+	$(`.modal-content-container > div[data-trainer="${tabIndex}"]`).show();
+}

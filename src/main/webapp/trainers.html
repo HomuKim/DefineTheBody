@@ -23,15 +23,12 @@
 			<div class="admin-grid">
 				<div class="admin-card">
 					<img src="images/member/ceo.jpg" alt="CEO" class="admin-image">
-					<p class="admin-name">CEO</p>
 				</div>
 				<div class="admin-card">
 					<img src="images/member/manager.jpg" alt="Manager" class="admin-image">
-					<p class="admin-name">Manager</p>
 				</div>
 				<div class="admin-card">
-					<img src="images/member/fc_leader.jpg" alt="FC Leader" class="admin-image">
-					<p class="admin-name">FC Leader</p>
+					<img src="images/member/fc_leader-thumbnail.jpg" alt="FC Leader" class="admin-image">
 				</div>
 			</div>
 		</section>
@@ -45,8 +42,8 @@
 					<p class="trainer-name">트레이너 이름</p>
 					<div class="trainer-hidden-details">
 						<img src="images/member/trainer2-profile.jpg" alt="트레이너 프로필 사진" class="trainer-profile-image">
-						<p class="trainer-career">트레이너 경력</p>
-						<p class="trainer-certification">자격증: 트레이너 자격증</p>
+						<p class="trainer-career">Career</p>
+						<p class="trainer-certification">Certification</p>
 						<img src="images/review-image.jpg" alt="고객 후기 이미지" class="trainer-review-image">
 						<p class="trainer-social">SNS: <a
 								href="https://www.instagram.com/define_thebody_joo">Instagram</a>
@@ -59,9 +56,9 @@
 					<img src="images/member/trainer3-full.jpg" alt="트레이너 3 전체 사진" class="trainer-full-image"
 						style="display: none;">
 				</div>
-				<div class="trainer-card" data-instagram="https://www.instagram.com/woosungpark4">
-					<img src="images/member/trainer4-thumbnail.jpg" alt="트레이너 4" class="trainer-image">
-					<img src="images/member/trainer4-full.jpg" alt="트레이너 4 전체 사진" class="trainer-full-image"
+				<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_sung">
+					<img src="images/member/Woosung/trainer4-thumbnail.jpg" alt="트레이너 4" class="trainer-image">
+					<img src="images/member/Woosung/trainer4-full.jpg" alt="트레이너 4 전체 사진" class="trainer-full-image"
 						style="display: none;">
 				</div>
 				<div class="trainer-card" data-instagram="https://www.instagram.com/define_thebody_han">
@@ -79,39 +76,54 @@
 					<img src="images/member/trainer7-full.jpg" alt="트레이너 7 전체 사진" class="trainer-full-image"
 						style="display: none;">
 				</div>
-				<div class="trainer-card" data-instagram="https://www.instagram.com/ri0___0ha">
-					<img src="images/member/trainer8-thumbnail.png" alt="트레이너 8" class="trainer-image">
-					<img src="images/member/trainer8-full.png" alt="트레이너 8 전체 사진" class="trainer-full-image"
-						style="display: none;">
-				</div>
 				<div class="trainer-card" data-instagram="https://www.instagram.com/eu____b">
 					<img src="images/member/trainer9-thumbnail.jpg" alt="트레이너 9" class="trainer-image">
 					<img src="images/member/trainer9-full.jpg" alt="트레이너 9 전체 사진" class="trainer-full-image"
 						style="display: none;">
 				</div>
 			</div>
-				<!-- 필요에 따라 더 많은 트레이너 카드를 추가할 수 있습니다 -->
+			<!-- 필요에 따라 더 많은 트레이너 카드를 추가할 수 있습니다 -->
 		</section>
 	</main>
 	<div id="footer"></div>
 	<div id="imageModal" class="modal">
 		<span class="close">&times;</span>
-		<button class="prev-btn">&lt;</button>
-		<div class="modal-content-container">
-			<img class="modal-content" id="modalImage">
-			<div class="trainer-info">
-				<img src="" alt="트레이너 프로필 사진" id="modalProfileImage">
-				<h3 id="trainerName"></h3>
-				<p id="trainerCareer"></p>
-				<p id="trainerCertification"></p>
-				<img src="" alt="고객 후기 이미지" id="modalReviewImage">
-				<p id="trainerSocial"></p>
+		<div class="modal-container">
+			<!-- 왼쪽 목록 -->
+			<div class="modal-sidebar">
+				<ul class="trainer-list">
+					<li data-trainer="1" class="trainer-item active">Profile</li>
+					<li data-trainer="2" class="trainer-item">Career</li>
+					<li data-trainer="3" class="trainer-item">Certification</li>
+					<li data-trainer="4" class="trainer-item">Review</li>
+				</ul>
 			</div>
-			<a id="instagramLink" class="instagram-button" target="_blank">
-				<img src="images/instagram-icon.png" alt="Instagram" class="instagram-icon">
-			</a>
+
+			<!-- 오른쪽 상세 정보 -->
+			<div class="modal-content-container">
+				<!-- 프로필 탭 내용 -->
+				<div class="trainer-profile" data-trainer="1">
+					<img src="" alt="트레이너 프로필 사진" id="modalProfileImage">
+					<h3 id="trainerName">트레이너 이름</h3>
+				</div>
+
+				<!-- 경력 탭 내용 -->
+				<div class="trainer-career" data-trainer="2">
+					<p id="trainerCareer">경력사항: 트레이너 경력</p>
+				</div>
+
+				<!-- 자격증 탭 내용 -->
+				<div class="trainer-certification" data-trainer="3">
+					<p id="trainerCertification">자격증: 트레이너 자격증</p>
+				</div>
+
+				<!-- 후기 탭 내용 -->
+				<div class="trainer-review" data-trainer="4">
+					<img src="" alt="고객 후기 이미지" id="modalReviewImage">
+					<p id="trainerSocial">SNS: <a href="#" id="instagramLink" target="_blank">Instagram</a></p>
+				</div>
+			</div>
 		</div>
-		<button class="next-btn">&gt;</button>
 	</div>
 </body>
 
