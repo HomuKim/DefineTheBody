@@ -31,18 +31,32 @@ function openModal(e) {
 	const trainerCard = $(this);
 	const modal = $('#imageModal');
 
-	const trainerName = trainerCard.find('.trainer-name').text() || '트레이너 이름 없음';
-	const profileImage = trainerCard.find('.trainer-profile-image').attr('src') || '기본 프로필 이미지 경로';
-	const career = trainerCard.find('.trainer-career').text() || '경력 정보 없음';
-	const certification = trainerCard.find('.trainer-certification').text() || '자격증 정보 없음';
-	const reviewImage = trainerCard.find('.trainer-review-image').attr('src') || '기본 후기 이미지 경로';
+	const profileImages = trainerCard.find('.trainer-profile-image').map(function() {
+		return $(this).attr('src');
+	}).get(); // 프로필 이미지 여러 장
+	const careerImage = trainerCard.find('.trainer-career-image').attr('src') || '기본 경력 이미지 경로';
+	const reviewImages = trainerCard.find('.trainer-review-image').map(function() {
+		return $(this).attr('src');
+	}).get(); // 후기 이미지 여러 장
 	const instagramLink = trainerCard.data('instagram') || '';
 
-	$('#trainerName').text(trainerName);
-	$('#modalProfileImage').attr('src', profileImage);
-	$('#trainerCareer').text(career);
-	$('#trainerCertification').text(certification);
-	$('#modalReviewImage').attr('src', reviewImage);
+	// 프로필 이미지 여러 장 표시
+	const profileImageContainer = $('.profile-images');
+	profileImageContainer.empty();
+	profileImages.forEach(image => {
+		profileImageContainer.append(`<img src="${image}" alt="프로필 이미지">`);
+	});
+
+	// 경력 이미지 표시
+	$('#careerImage').attr('src', careerImage);
+
+	// 후기 이미지 여러 장 표시
+	const reviewImageContainer = $('.review-images');
+	reviewImageContainer.empty();
+	reviewImages.forEach(image => {
+		reviewImageContainer.append(`<img src="${image}" alt="후기 이미지">`);
+	});
+
 	$('#instagramLink').attr('href', instagramLink);
 
 	// 1번 탭 활성화 및 내용 표시
@@ -51,8 +65,10 @@ function openModal(e) {
 	$('.modal-content-container > div').hide();
 	$('.modal-content-container > div[data-trainer="1"]').show();
 
-	modal.show();
+	modal.addClass('show');
 }
+
+
 
 // 모달 닫기 함수
 function closeModal() {
