@@ -1,4 +1,13 @@
-$(document).ready(function() {
+// 전역 변수 선언
+const tabMapping = {
+	career: 1,
+	project: 2,
+	education: 3
+};
+
+let scrollPosition = 0; // 현재 스크롤 위치를 저장할 변수
+
+$(document).ready(function () {
 	// 1. 헤더와 푸터 로드
 	loadHeaderFooter();
 
@@ -9,14 +18,45 @@ $(document).ready(function() {
 	$('.close').on('click', closeModal);
 	$('#imageModal').on('click', closeModalBackground);
 
-	// 4. 모달 탭 전환
-	$('.trainer-item').on('click', switchTab);
+	// 4. 탭 전환 이벤트
+	$('.trainer-item').on('click', function () {
+		const tabIndex = $(this).data('trainer');
+		activateTab(tabIndex);
+	});
+
+	// 사이드바 탭 클릭 (이벤트 위임 방식)
+	$(document).on('click', '.tab-item', function () {
+		const tabName = $(this).data('tab'); // 클릭한 탭의 이름 가져오기
+		const tabIndex = tabMapping[tabName]; // 매핑된 숫자 가져오기
+
+		// 모든 탭에서 active 클래스 제거
+		$('.tab-item').removeClass('active');
+
+		// 클릭한 탭에 active 클래스 추가
+		$(this).addClass('active');
+
+		// 모든 콘텐츠 숨기기
+		$('.modal-content-container > div').hide();
+
+		// 클릭한 탭에 해당하는 콘텐츠 표시
+		$(`.modal-content-container > div[data-trainer="${tabIndex}"]`).show();
+	});
+
+	// 6. 모달 콘텐츠 스크롤 이벤트 (디바운싱 적용)
+	$('.modal-content-container').on(
+		'scroll',
+		_.debounce(handleScrollEvent, 100)
+	);
+
 });
 
 // 헤더와 푸터 로드 함수
 function loadHeaderFooter() {
-	$('#header').load('header.html', function() {
-		if (typeof initializeHeader === 'function') {
+	$('#header').load('header.html', function (response, status) {
+		if (status === 'error') {
+			console.error('헤더 로드 실패');
+			$('#header').html('<p>기본 헤더</p>');
+		} else if (typeof initializeHeader === 'function') {
 			initializeHeader();
 		}
 	});
@@ -28,73 +68,140 @@ function openModal(e) {
 	e.preventDefault();
 	e.stopPropagation();
 
-	const trainerCard = $(this);
+	const trainerCard = $(this); // 클릭한 트레이너 카드
 	const modal = $('#imageModal');
 
-	const profileImages = trainerCard.find('.trainer-profile-image').map(function() {
+	// 현재 스크롤 위치 저장
+	scrollPosition = window.scrollY;
+
+	// body를 고정하고 현재 스크롤 위치만큼 위로 이동시켜서 화면이 움직이지 않도록 함
+	$('body').css({
+		position: 'fixed',
+		top: `-${scrollPosition}px`,
+		width: '100%',
+		height: '100%'
+	}).addClass('modal-open');
+
+	//모달 활성화
+	modal.addClass('show');
+
+	// 프로필 이미지 가져오기
+	const profileImages = trainerCard.find('.trainer-profile-image').map(function () {
 		return $(this).attr('src');
-	}).get(); // 프로필 이미지 여러 장
-	const careerImage = trainerCard.find('.trainer-career-image').attr('src') || '기본 경력 이미지 경로';
-	const reviewImages = trainerCard.find('.trainer-review-image').map(function() {
+	}).get();
+
+	// 경력 이미지 가져오기
+	const careerImage = trainerCard.find('.trainer-career-image').attr('src') || '';
+
+	// 후기 이미지 가져오기
+	const reviewImages = trainerCard.find('.trainer-review-image').map(function () {
 		return $(this).attr('src');
-	}).get(); // 후기 이미지 여러 장
+	}).get();
+
+	// Instagram 링크 가져오기
 	const instagramLink = trainerCard.data('instagram') || '';
 
-	// 프로필 이미지 여러 장 표시
-	const profileImageContainer = $('.profile-images');
-	profileImageContainer.empty();
-	profileImages.forEach(image => {
-		profileImageContainer.append(`<img src="${image}" alt="프로필 이미지">`);
+
+	// 프로필 썸네일 추가
+	const thumbnailsContainer = $('.thumbnails');
+	thumbnailsContainer.empty(); // 기존 썸네일 초기화
+	profileImages.forEach((image, index) => {
+		thumbnailsContainer.append(`<img src="${image}" alt="프로필 이미지 ${index + 1}" class="thumbnail-image">`);
 	});
 
-	// 경력 이미지 표시
+	// 첫 번째 이미지를 풀사이즈로 설정
+	if (profileImages.length > 0) {
+		$('#fullImage').attr('src', profileImages[0]);
+	}
+
+	// 썸네일 호버 시 풀 이미지 변경 이벤트 추가
+	document.querySelectorAll('.thumbnail-image').forEach(thumbnail => {
+		thumbnail.addEventListener('mouseover', function () {
+			document.getElementById('fullImage').src = this.src; // 호버한 썸네일의 src를 풀 이미지로 설정
+		});
+	});
+
+	// 경력 이미지 설정
 	$('#careerImage').attr('src', careerImage);
 
-	// 후기 이미지 여러 장 표시
-	const reviewImageContainer = $('.review-images');
-	reviewImageContainer.empty();
-	reviewImages.forEach(image => {
-		reviewImageContainer.append(`<img src="${image}" alt="후기 이미지">`);
+	// 후기 이미지 추가
+	const reviewContainer = $('.review-images');
+	reviewContainer.empty();
+
+	reviewImages.forEach((image, index) => {
+		reviewContainer.append(`<img src="${image}" alt="후기 이미지 ${index + 1}">`);
 	});
 
+	// Instagram 링크 설정
 	$('#instagramLink').attr('href', instagramLink);
 
-	// 1번 탭 활성화 및 내용 표시
-	$('.trainer-item').removeClass('active');
-	$('.trainer-item[data-trainer="1"]').addClass('active');
-	$('.modal-content-container > div').hide();
-	$('.modal-content-container > div[data-trainer="1"]').show();
-
-	modal.addClass('show');
+	activateTab(1); // 첫 번째 탭 활성화
 }
 
+// 탭 활성화 함수
+function activateTab(tabIndex) {
+	$('.trainer-item').removeClass('active');
+	$(`.trainer-item[data-trainer="${tabIndex}"]`).addClass('active');
 
+	$('.modal-content-container > div').hide();
+	$(`.modal-content-container > div[data-trainer="${tabIndex}"]`).show();
+
+	updateSidebarState(tabIndex);
+
+	// 스크롤 위치 초기화
+	$('.modal-content-container').scrollTop(0);
+}
+
+// 사이드바 탭 활성화 함수
+function activateSidebarTab(tabName) {
+	$('.sidebar-tab').removeClass('active');
+	$(`.sidebar-tab[data-tab="${tabName}"]`).addClass('active');
+
+	$('.tab-content').hide();
+	$(`.tab-content[data-tab="${tabName}"]`).show();
+}
 
 // 모달 닫기 함수
 function closeModal() {
-	$('#imageModal').hide();
-	// 모달 창을 닫을 때 초기화
-	$('.trainer-item').removeClass('active');
-	$('.trainer-item[data-trainer="1"]').addClass('active');
-	$('.modal-content-container > div').hide();
-	$('.modal-content-container > div[data-trainer="1"]').show();
+	const modal = $('#imageModal'); // 모달 요소 가져오기
+
+	modal.removeClass('show'); // 모달 숨기기
+
+	// body 스타일 초기화 및 스크롤 위치 복원
+	$('body').css({
+		position: '',
+		top: '',
+		width: '',
+		height: ''
+	}).removeClass('modal-open');
+
+	window.scrollTo(0, scrollPosition); // 저장된 스크롤 위치로 이동
+
+	// 초기화 작업
+	$('.thumbnails, .review-images').empty(); // 썸네일 및 후기 이미지 비우기
+	$('#fullImage, #careerImage').attr('src', ''); // 풀사이즈 및 경력 이미지 초기화
+	$('#instagramLink').attr('href', '#'); // Instagram 링크 초기화
+
+	activateTab(1); // 첫 번째 탭으로 초기화
 }
 
-
+// 배경 클릭으로 모달 닫기 함수
 function closeModalBackground(e) {
 	if ($(e.target).is('#imageModal')) {
 		closeModal();
-	} else {
-		e.stopPropagation();
 	}
 }
 
-// 탭 전환 함수
-function switchTab() {
-	$('.trainer-item').removeClass('active');
-	$(this).addClass('active');
+// 사이드바 상태 업데이트 함수
+function updateSidebarState(tabIndex) {
+	const tabMapping = {
+		1: 'career',
+		2: 'project',
+		3: 'education'
+	};
+	const activeTabName = tabMapping[tabIndex];
 
-	const tabIndex = $(this).data('trainer');
-	$('.modal-content-container > div').hide();
-	$(`.modal-content-container > div[data-trainer="${tabIndex}"]`).show();
+	$('.sidebar .tab-item').removeClass('active');
+	$(`.sidebar .tab-item[data-tab="${activeTabName}"]`).addClass('active');
 }
+
