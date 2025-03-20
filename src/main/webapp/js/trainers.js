@@ -1,3 +1,4 @@
+
 // 전역 변수 선언
 const tabMapping = {
 	career: 1,
@@ -11,8 +12,20 @@ $(document).ready(function () {
 	// 1. 헤더와 푸터 로드
 	loadHeaderFooter();
 
-	// 2. 트레이너 카드 클릭 시 모달 창 열기
-	$('.trainer-card').on('click', openModal);
+	// 2. 카드 클릭 시 모달 창 열기
+	$('.trainer-card, .admin-card').on('click', function (e) {
+		e.preventDefault(); // 기본 동작 방지
+		e.stopPropagation(); // 이벤트 전파 방지
+
+		// data-no-modal 속성이 있는 경우 모달 열림 방지
+		if ($(this).data('no-modal')) {
+			console.log('모달이 열리지 않습니다.'); // 디버깅 메시지 출력
+			return false; // 함수 종료
+		}
+
+		// data-no-modal 속성이 없는 경우에만 openModal 함수 호출
+		openModal.call(this, e);
+	});
 
 	// 3. 모달 창 닫기
 	$('.close').on('click', closeModal);
@@ -42,12 +55,6 @@ $(document).ready(function () {
 		$(`.modal-content-container > div[data-trainer="${tabIndex}"]`).show();
 	});
 
-	// 6. 모달 콘텐츠 스크롤 이벤트 (디바운싱 적용)
-	$('.modal-content-container').on(
-		'scroll',
-		_.debounce(handleScrollEvent, 100)
-	);
-
 });
 
 // 헤더와 푸터 로드 함수
@@ -69,7 +76,7 @@ function openModal(e) {
 	e.stopPropagation();
 
 	const trainerCard = $(this); // 클릭한 트레이너 카드
-	const modal = $('#imageModal');
+	const modal = $('#imageModal'); // 모달 요소 가져오기
 
 	// 현재 스크롤 위치 저장
 	scrollPosition = window.scrollY;
@@ -88,49 +95,67 @@ function openModal(e) {
 	// 프로필 이미지 가져오기
 	const profileImages = trainerCard.find('.trainer-profile-image').map(function () {
 		return $(this).attr('src');
-	}).get();
+	}).get().filter(src => src && src.trim() !== '');
+
 
 	// 경력 이미지 가져오기
 	const careerImage = trainerCard.find('.trainer-career-image').attr('src') || '';
 
 	// 후기 이미지 가져오기
 	const reviewImages = trainerCard.find('.trainer-review-image').map(function () {
-		return $(this).attr('src');
-	}).get();
+		return $(this).attr('src'); // src 속성만 가져옴
+	}).get().filter(src => src && src.trim() !== ''); // 유효한 src만 필터링
+
+
+
+
 
 	// Instagram 링크 가져오기
 	const instagramLink = trainerCard.data('instagram') || '';
-
 
 	// 프로필 썸네일 추가
 	const thumbnailsContainer = $('.thumbnails');
 	thumbnailsContainer.empty(); // 기존 썸네일 초기화
 	profileImages.forEach((image, index) => {
-		thumbnailsContainer.append(`<img src="${image}" alt="프로필 이미지 ${index + 1}" class="thumbnail-image">`);
+		if (image && image.trim() !== '') { // 이미지가 있는 경우에만 추가
+			thumbnailsContainer.append(`<img src="${image}" alt="프로필 이미지 ${index + 1}" class="thumbnail-image">`);
+		}
 	});
 
 	// 첫 번째 이미지를 풀사이즈로 설정
 	if (profileImages.length > 0) {
-		$('#fullImage').attr('src', profileImages[0]);
+		$('#fullImage').attr('src', profileImages[0]).show();
+	} else {
+		$('#fullImage').hide(); // 이미지가 없으면 숨김
 	}
 
 	// 썸네일 호버 시 풀 이미지 변경 이벤트 추가
 	document.querySelectorAll('.thumbnail-image').forEach(thumbnail => {
 		thumbnail.addEventListener('mouseover', function () {
 			document.getElementById('fullImage').src = this.src; // 호버한 썸네일의 src를 풀 이미지로 설정
+			document.getElementById('fullImage').style.display = 'block'; // 풀 이미지를 보이도록 설정
 		});
 	});
 
 	// 경력 이미지 설정
-	$('#careerImage').attr('src', careerImage);
+	if (careerImage && careerImage.trim() !== '') {
+		$('#careerImage').attr('src', careerImage).show();
+	} else {
+		$('#careerImage').hide(); // 경력 이미지가 없으면 숨김
+	}
 
 	// 후기 이미지 추가
 	const reviewContainer = $('.review-images');
 	reviewContainer.empty();
-
-	reviewImages.forEach((image, index) => {
-		reviewContainer.append(`<img src="${image}" alt="후기 이미지 ${index + 1}">`);
-	});
+	const filteredReviewImages = reviewImages.filter(src => src && src.trim() !== '');
+	if (filteredReviewImages.length > 0) {
+		filteredReviewImages.forEach((image, index) => {
+			reviewContainer.append(`<img src="${image}" alt="후기 이미지 ${index + 1}">`);
+			reviewContainer.show(); // 후기 이미지를 표시함
+		});
+	} else {
+		reviewContainer.hide(); // 후기 이미지가 없을 경우 컨테이너를 숨김
+	}
 
 	// Instagram 링크 설정
 	$('#instagramLink').attr('href', instagramLink);
@@ -204,4 +229,3 @@ function updateSidebarState(tabIndex) {
 	$('.sidebar .tab-item').removeClass('active');
 	$(`.sidebar .tab-item[data-tab="${activeTabName}"]`).addClass('active');
 }
-
