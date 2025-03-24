@@ -36,7 +36,7 @@ function showSlides() {
 
 // DOM 로드 완료 시 실행되는 함수
 document.addEventListener('DOMContentLoaded', function () {
-	
+
 	//fade-out 클래스 제거
 	document.body.classList.remove('fade-out');
 

@@ -101,6 +101,11 @@ body.fade-out {
 	background-color: var(--hover-red);
 }
 
+.reveal {
+	visibility: hidden;
+}
+
+
 /* 콘텐츠 섹션 스타일 */
 .content-section {
 	display: flex;

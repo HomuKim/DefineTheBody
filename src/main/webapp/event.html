@@ -9,7 +9,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body>
+<body class="fade-out">
 	<div id="header"></div>
 	<main>
 		<section class="event-hero">
@@ -41,6 +41,10 @@
 		});
 
 		document.addEventListener('DOMContentLoaded', function () {
+
+			// 페이지 로드 후 fade-out 클래스 제거 (페이드 인 효과)
+			document.body.classList.remove('fade-out');
+
 			const eventImage = document.getElementById('eventImage');
 			const eventTitle = document.getElementById('eventTitle');
 			const eventDescription = document.getElementById('eventDescription');
@@ -78,6 +82,18 @@
 
 			// 초기 이벤트 표시
 			updateEvent(currentIndex);
+
+			// 링크 클릭 시 페이드 아웃 효과 적용
+			document.querySelectorAll('a').forEach(link => {
+				link.addEventListener('click', event => {
+					event.preventDefault();
+					const url = link.getAttribute('href');
+					document.body.classList.add('fade-out');
+					setTimeout(() => {
+						window.location.href = url;
+					}, 700);
+				});
+			});
 		});
 	</script>
 </body>

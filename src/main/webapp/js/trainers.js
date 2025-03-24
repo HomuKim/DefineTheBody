@@ -9,6 +9,22 @@ const tabMapping = {
 let scrollPosition = 0; // 현재 스크롤 위치를 저장할 변수
 
 $(document).ready(function () {
+
+	// 페이지 로드 후 fade-out 클래스 제거
+	document.body.classList.remove('fade-out');
+
+	// 링크 클릭 시 페이드 아웃 효과 적용 (페이지 전환)
+	document.querySelectorAll('a').forEach(link => {
+		link.addEventListener('click', event => {
+			event.preventDefault();
+			const url = link.getAttribute('href');
+			document.body.classList.add('fade-out');
+			setTimeout(() => {
+				window.location.href = url;
+			}, 700);
+		});
+	});
+
 	// 1. 헤더와 푸터 로드
 	loadHeaderFooter();
 
