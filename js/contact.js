@@ -27,7 +27,7 @@ function openMap() {
 		});
 
 		// 마커 클릭 시 네이버 지도로 이동
-		naver.maps.Event.addListener(marker, 'click', function() {
+		naver.maps.Event.addListener(marker, 'click', function () {
 			window.open("https://map.naver.com/v5/search/디파인더바디짐/place/" + lat + "," + lng);
 		});
 	}
@@ -57,7 +57,7 @@ function openImageModal(imageSrc) {
 }
 
 // 페이지 로드 완료 시 실행되는 함수
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 	var modal = document.getElementById("videoModal");
 	var player = document.getElementById("youtubePlayer");
 	var closeBtn = modal.querySelector('.close-btn');
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	// 모달 외부 클릭 시 닫기
-	window.onclick = function(event) {
+	window.onclick = function (event) {
 		if (event.target == modal) {
 			closeVideoModal();
 		}
@@ -106,7 +106,23 @@ function closeImageModal() {
 }
 
 // jQuery를 사용한 페이지 초기화
-$(document).ready(function() {
+$(document).ready(function () {
+
+	// 페이지 로드 후 fade-out 클래스 제거
+	document.body.classList.remove('fade-out');
+
+	 // 링크 클릭 시 페이드 아웃 효과 적용
+	 document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault(); 
+            const url = link.getAttribute('href');
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 700);
+        });
+    });
+
 	// 네이버맵 모달 관련
 	$('#mapModal .close').on('click', closeMapModal);
 
@@ -114,7 +130,7 @@ $(document).ready(function() {
 	$('#imageModal .close').on('click', closeImageModal);
 
 	// 모달 외부 클릭 시 닫기
-	$(window).on('click', function(event) {
+	$(window).on('click', function (event) {
 		var mapModal = document.getElementById("mapModal");
 		var imageModal = document.getElementById("imageModal");
 
@@ -127,7 +143,7 @@ $(document).ready(function() {
 	});
 
 	// 채팅 문의 클릭 이벤트
-	$('.contact-item:first-child').on('click', function() {
+	$('.contact-item:first-child').on('click', function () {
 		window.open('https://talk.naver.com/ct/w5u13y?frm=pnmb&frm=nmb_detail#nafullscreen');
 	});
 
@@ -136,7 +152,7 @@ $(document).ready(function() {
 		$('body').addClass('admin-logged-in');
 		makeContentEditable(true);
 	}
-	$("#header").load("header.html", function() {
+	$("#header").load("header.html", function () {
 		// 헤더 로드 완료 후 실행될 코드
 		if (typeof initializeHeader === 'function') {
 			initializeHeader();

@@ -1,8 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 	let currentIndex = 0;
 	const images = document.querySelectorAll('.thumbnail');
 	const mainImage = document.getElementById('mainImage');
 	let isAnimating = false;
+
+	// 페이지 로드 후 fade-out 클래스 제거 (페이드 인 효과)
+	document.body.classList.remove('fade-out');
 
 	function showImage(index) {
 		if (isAnimating) return;
@@ -61,12 +64,25 @@ document.addEventListener('DOMContentLoaded', function() {
 	showImage(0);
 });
 
-window.addEventListener('load', function() {
+// 링크 클릭 시 페이드 아웃 효과 적용
+document.querySelectorAll('a').forEach(link => {
+	link.addEventListener('click', event => {
+		event.preventDefault(); // 기본 링크 동작 방지
+		const url = link.getAttribute('href');
+
+		document.body.classList.add('fade-out'); // 페이드 아웃 효과 시작
+		setTimeout(() => {
+			window.location.href = url; // 페이지 이동
+		}, 700); // CSS transition-duration과 동일한 시간 설정
+	});
+});
+
+window.addEventListener('load', function () {
 	if (sessionStorage.getItem('adminLoggedIn') === 'true') {
 		document.body.classList.add('admin-logged-in');
 		makeContentEditable(true);
 	}
-	$("#header").load("header.html", function() {
+	$("#header").load("header.html", function () {
 		// 헤더 로드 완료 후 실행될 코드
 		if (typeof initializeHeader === 'function') {
 			initializeHeader();
