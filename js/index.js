@@ -34,16 +34,15 @@ function showSlides() {
 	setTimeout(showSlides, 7000);
 }
 
-// 콘텐츠 편집 가능 상태 변경 함수
-function makeContentEditable(editable) {
-	const editableElements = document.querySelectorAll('.editable');
-	editableElements.forEach(el => el.contentEditable = editable);
-}
-
 // DOM 로드 완료 시 실행되는 함수
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+	const elements = document.querySelectorAll('.animate-sequence');
+
+	//fade-out 클래스 제거
+	document.body.classList.remove('fade-out');
+
 	// 헤더와 푸터 로드
-	$("#header").load("header.html", function() {
+	$("#header").load("header.html", function () {
 		if (typeof initializeHeader === 'function') {
 			initializeHeader();
 		}
@@ -78,11 +77,23 @@ document.addEventListener('DOMContentLoaded', function() {
 			slides = document.querySelectorAll('.event-image');
 			showSlides();
 		});
+
+	elements.forEach((el, index) => {
+		setTimeout(() => {
+			el.classList.add('active'); // 순서대로 active 클래스 추가
+		}, index * 700); // 각 요소마다 500ms 간격으로 애니메이션 실행
+	});
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+// 링크 클릭 시 페이드 아웃 효과 적용
+document.querySelectorAll('a').forEach(link => {
+	link.addEventListener('click', event => {
+		event.preventDefault(); // 기본 링크 동작 방지
+		const url = link.getAttribute('href');
 
-	if (typeof App !== 'undefined' && document.getElementById('react-root')) {
-		ReactDOM.render(React.createElement(App), document.getElementById('react-root'));
-	}
+		document.body.classList.add('fade-out'); // 페이드 아웃 효과 시작
+		setTimeout(() => {
+			window.location.href = url; // 페이지 이동
+		}, 700); // CSS transition-duration과 동일한 시간 설정
+	});
 });

@@ -36,6 +36,7 @@ function showSlides() {
 
 // DOM 로드 완료 시 실행되는 함수
 document.addEventListener('DOMContentLoaded', function () {
+	const elements = document.querySelectorAll('.animate-sequence');
 
 	//fade-out 클래스 제거
 	document.body.classList.remove('fade-out');
@@ -76,6 +77,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			slides = document.querySelectorAll('.event-image');
 			showSlides();
 		});
+
+	elements.forEach((el, index) => {
+		setTimeout(() => {
+			el.classList.add('active'); // 순서대로 active 클래스 추가
+		}, index * 700); // 각 요소마다 500ms 간격으로 애니메이션 실행
+	});
 });
 
 // 링크 클릭 시 페이드 아웃 효과 적용
