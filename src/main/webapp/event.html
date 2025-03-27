@@ -67,9 +67,30 @@
 			let currentIndex = 0;
 
 			function updateEvent(index) {
-				eventImage.src = events[index].image;
-				eventTitle.textContent = events[index].title;
-				eventDescription.innerHTML = events[index].description;
+				// 기존 콘텐츠에 페이드 아웃 클래스 추가
+				eventImage.classList.add('fade-out');
+				eventTitle.classList.add('fade-out');
+				eventDescription.classList.add('fade-out');
+
+				setTimeout(() => {
+					eventImage.src = events[index].image;
+					eventTitle.textContent = events[index].title;
+					eventDescription.innerHTML = events[index].description;
+
+					// 페이드 아웃 제거, 페이드 인 추가
+					eventImage.classList.remove('fade-out');
+					eventImage.classList.add('fade-in');
+					eventTitle.classList.remove('fade-out');
+					eventTitle.classList.add('fade-in');
+					eventDescription.classList.remove('fade-out');
+					eventDescription.classList.add('fade-in');
+
+					setTimeout(() => {
+						eventImage.classList.remove('fade-in');
+						eventTitle.classList.remove('fade-in');
+						eventDescription.classList.remove('fade-in');
+					}, 300); // CSS transition 시간과 동일하게 설정
+				}, 300); // CSS transition 시간과 동일하게 설정 (0.3초)
 			}
 
 			function changeEvent(direction) {
