@@ -322,6 +322,7 @@ body.fade-out {
 	transition: all 0.3s ease;
 	flex: 1;
 	margin: 0 10px;
+	cursor: pointer;
 }
 
 .program-icon i {
@@ -333,6 +334,7 @@ body.fade-out {
 .program-icon:hover {
 	transform: translateY(-5px);
 	background: rgba(255, 255, 255, 0.2);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* 이미지 모달 전용 스타일 */

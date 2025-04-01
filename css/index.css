@@ -30,7 +30,7 @@ body.fade-out {
 
 /* 히어로 섹션 스타일 */
 .hero-section {
-	height: 100vh;
+	height: 80vh;
 	/* 화면 전체 높이 */
 	text-align: center;
 	padding: 50px 20px;
@@ -119,6 +119,7 @@ body.fade-out {
 	/* 원래 위치로 이동 */
 }
 
+/* 스크롤 애니메이션 효과 */
 .reveal {
 	visibility: hidden;
 }
@@ -192,7 +193,7 @@ body.fade-out {
 .feature-cards {
 	display: grid;
 	/* 그리드 레이아웃 사용 */
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(1, 4fr);
 	/* 가로 2열 */
 	gap: 20px;
 	/* 카드 간 간격 */
