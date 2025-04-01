@@ -1,6 +1,19 @@
 // 슬라이드 인덱스 초기화
 let slideIndex = 0;
 let slides;
+let lastScrollTop = 0;
+
+
+function throttle(callback, limit) {
+	let waiting = false;
+	return function () {
+		if (!waiting) {
+			callback.apply(this, arguments);
+			waiting = true;
+			setTimeout(() => (waiting = false), limit);
+		}
+	};
+}
 
 // 유효한 이미지만 필터링하는 함수
 function filterValidImages() {
@@ -37,6 +50,7 @@ function showSlides() {
 // DOM 로드 완료 시 실행되는 함수
 document.addEventListener('DOMContentLoaded', function () {
 	const elements = document.querySelectorAll('.animate-sequence');
+
 
 	//fade-out 클래스 제거
 	document.body.classList.remove('fade-out');
