@@ -1,92 +1,57 @@
 document.addEventListener('DOMContentLoaded', function () {
-	let currentIndex = 0;
-	const images = document.querySelectorAll('.thumbnail');
-	const mainImage = document.getElementById('mainImage');
-	let isAnimating = false;
-
 	// 페이지 로드 후 fade-out 클래스 제거 (페이드 인 효과)
 	document.body.classList.remove('fade-out');
 
-	function showImage(index) {
-		if (isAnimating) return;
-		isAnimating = true;
+	// 링크 클릭 시 페이드 아웃 효과 적용
+	document.querySelectorAll('a').forEach(link => {
+		link.addEventListener('click', event => {
+			event.preventDefault(); // 기본 링크 동작 방지
+			const url = link.getAttribute('href');
 
-		const mainImg = document.getElementById('mainImage');
-		mainImg.classList.add('fade-out');
-
-		setTimeout(() => {
-			mainImg.src = images[index].src;
-			mainImg.classList.remove('fade-out');
-			mainImg.classList.add('fade-in');
-
-			images.forEach((thumb, i) => {
-				thumb.classList.toggle('active', i === index);
-			});
-
+			document.body.classList.add('fade-out'); // 페이드 아웃 효과 시작
 			setTimeout(() => {
-				isAnimating = false;
-				mainImg.classList.remove('fade-in');
-			}, 500);
-		}, 500);
-	}
-
-	function changeSlide(direction) {
-		if (isAnimating) return;
-
-		// 현재 메인 이미지의 src와 일치하는 썸네일 찾기
-		const currentMainSrc = mainImage.src;
-		let currentMainIndex = Array.from(images).findIndex(img => img.src === currentMainSrc);
-
-		// 찾은 인덱스가 유효하지 않으면 currentIndex 사용
-		if (currentMainIndex === -1) currentMainIndex = currentIndex;
-
-		// 다음/이전 인덱스 계산
-		let nextIndex = currentMainIndex + direction;
-
-		// 범위 체크
-		if (nextIndex >= images.length) nextIndex = 0;
-		if (nextIndex < 0) nextIndex = images.length - 1;
-
-		currentIndex = nextIndex;
-		showImage(nextIndex);
-	}
-
-	// 썸네일 클릭 이벤트
-	images.forEach((thumbnail, index) => {
-		thumbnail.addEventListener('click', () => showImage(index));
+				window.location.href = url; // 페이지 이동
+			}, 700); // CSS transition-duration과 동일한 시간 설정
+		});
 	});
 
-	// 이전/다음 버튼 이벤트
-	document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
-	document.querySelector('.next').addEventListener('click', () => changeSlide(1));
+	// 헤더/푸터 동적 로드
+	fetch("header.html")
+		.then(response => {
+			if (!response.ok) throw new Error("헤더를 로드할 수 없습니다.");
+			return response.text();
+		})
+		.then(data => {
+			document.getElementById("header").innerHTML = data;
+		})
+		.catch(error => console.error(error));
 
-	// 초기 이미지 표시
-	showImage(0);
-});
+	fetch("footer.html")
+		.then(response => {
+			if (!response.ok) throw new Error("푸터를 로드할 수 없습니다.");
+			return response.text();
+		})
+		.then(data => {
+			document.getElementById("footer").innerHTML = data;
+		})
+		.catch(error => console.error(error));
 
-// 링크 클릭 시 페이드 아웃 효과 적용
-document.querySelectorAll('a').forEach(link => {
-	link.addEventListener('click', event => {
-		event.preventDefault(); // 기본 링크 동작 방지
-		const url = link.getAttribute('href');
+	// 탭 전환 기능
+	document.querySelectorAll('.tab-item').forEach(tab => {
+		tab.addEventListener('click', function () {
+			// 활성 탭 업데이트
+			document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+			this.classList.add('active');
 
-		document.body.classList.add('fade-out'); // 페이드 아웃 효과 시작
-		setTimeout(() => {
-			window.location.href = url; // 페이지 이동
-		}, 700); // CSS transition-duration과 동일한 시간 설정
+			// 콘텐츠 영역 전환
+			const targetTab = this.getAttribute('data-tab');
+			document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+			const targetContent = document.getElementById(targetTab);
+			if (targetContent) targetContent.classList.add('active');
+		});
 	});
-});
 
-window.addEventListener('load', function () {
-	if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-		document.body.classList.add('admin-logged-in');
-		makeContentEditable(true);
-	}
-	$("#header").load("header.html", function () {
-		// 헤더 로드 완료 후 실행될 코드
-		if (typeof initializeHeader === 'function') {
-			initializeHeader();
-		}
-	});
-	$("#footer").load("footer.html");
+	// 초기 활성 탭 설정 (1층)
+	const initialTab = document.querySelector('.tab-item[data-tab="floor1"]');
+	if (initialTab) initialTab.click();
 });
