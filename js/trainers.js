@@ -106,7 +106,10 @@ function openModal(e) {
 	}).addClass('modal-open');
 
 	//모달 활성화
-	modal.addClass('show');
+	modal.css('display', 'flex'); // 먼저 보여지도록 설정
+	setTimeout(() => {
+		modal.addClass('show'); // 페이드인 효과 활성화
+	}, 10); // 약간의 지연으로 transition 효과를 적용
 
 	// 프로필 이미지 가져오기
 	const profileImages = trainerCard.find('.trainer-profile-image').map(function () {
@@ -207,6 +210,10 @@ function closeModal() {
 	const modal = $('#imageModal'); // 모달 요소 가져오기
 
 	modal.removeClass('show'); // 모달 숨기기
+
+	setTimeout(() => {
+		modal.css('display', 'none'); // 페이드아웃 후 display를 none으로 설정
+	}, 500); // transition 시간과 동일하게 설정
 
 	// body 스타일 초기화 및 스크롤 위치 복원
 	$('body').css({

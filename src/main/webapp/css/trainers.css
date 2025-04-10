@@ -665,8 +665,9 @@ admin-card img {
 		width: calc(100% - 20px);
 		text-align: center;
 	}
-	.trainer-review img{
-		width:100%;
+
+	.trainer-review img {
+		width: 100%;
 	}
 }
 

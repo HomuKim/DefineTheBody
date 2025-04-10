@@ -8,6 +8,7 @@
 	--shadow-color: rgba(0, 0, 0, 0.1);
 }
 
+/* 기본적인 페이지 스타일 설정 */
 body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 	margin: 0;
@@ -20,12 +21,14 @@ body {
 	visibility: visible;
 }
 
+/* 페이드아웃 효과를 위한 스타일 */
 body.fade-out {
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity 0.7s ease-in-out, visibility 0s 0.7s;
 }
 
+/* 모달 활성화 시 스크롤 비활성화 및 화면 고정 */
 body.modal-open {
 	overflow: hidden;
 	/* 스크롤 비활성화 */
@@ -37,6 +40,7 @@ body.modal-open {
 	/* 화면 높이 유지 */
 }
 
+/* 트레이너 섹션의 배경 및 레이아웃 스타일 */
 .trainer-hero {
 	background-color: rgba(0, 0, 0, 0.6);
 	color: var(--pure-white);
@@ -55,6 +59,7 @@ body.modal-open {
 	/* 모서리를 둥글게 만듭니다 */
 }
 
+/* 트레이너 섹션의 배경 이미지 스타일 */
 .trainer-hero::before {
 	content: '';
 	position: absolute;
@@ -70,12 +75,14 @@ body.modal-open {
 	z-index: -1;
 }
 
+/* 트레이너 섹션 제목 스타일 */
 .trainer-hero h1 {
 	font-size: 48px;
 	margin-bottom: 20px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* 트레이너 섹션 본문 텍스트 스타일 */
 .trainer-hero p {
 	font-size: 20px;
 	max-width: 600px;
@@ -83,6 +90,7 @@ body.modal-open {
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* 관리자 섹션 레이아웃 스타일 */
 #admin-section {
 	margin: 40px auto;
 	text-align: center;
@@ -91,12 +99,14 @@ body.modal-open {
 	align-items: center;
 }
 
+/* 관리자 카드 배열 스타일 */
 .admin-grid {
 	display: flex;
 	justify-content: center;
 	gap: 20px;
 }
 
+/* 개별 관리자 카드 스타일 */
 .admin-card {
 	position: relative;
 	overflow: hidden;
@@ -112,6 +122,7 @@ body.modal-open {
 	background-color: #fff;
 }
 
+/* 관리자 카드 이미지 스타일 */
 .admin-image {
 	width: 270px;
 	height: 400px;
@@ -122,26 +133,31 @@ body.modal-open {
 	/* 부드러운 확대 효과 */
 }
 
+/* 이미지 크기와 비율을 유지하며 카드 내부에 표시 */
 admin-card img {
 	display: block;
 	width: 100%;
 	height: auto;
 }
 
+/* 마우스 호버 시 카드를 위로 살짝 이동하는 애니메이션 효과를 적용 */
 .admin-card:hover {
 	transform: translateY(-3px);
 }
 
+/* 호버 시 이미지 확대 및 밝기 감소 효과를 추가 */
 .admin-card:hover .admin-image {
 	transform: scale(1.1);
 	filter: brightness(50%);
 }
 
+/* 호버 시 숨겨져 있던 이름을 표시 */
 .admin-card:hover .trainer-name {
 	opacity: 1;
 	/* 호버 시 이름 표시 */
 }
 
+/* 트레이너 목록 레이아웃 스타일 */
 .trainers-grid {
 	display: flex;
 	flex-direction: column;
@@ -150,11 +166,13 @@ admin-card img {
 	margin-bottom: 40px;
 }
 
+/* 트레이너 목록 제목 스타일 */
 .trainers-grid h2 {
 	font-size: 24px;
 	margin-bottom: 20px;
 }
 
+/* 트레이너 카드 컨테이너 그리드 스타일 */
 .trainer-cards-container {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(200px, 1fr));
@@ -163,6 +181,7 @@ admin-card img {
 	padding: 0 20px;
 }
 
+/* 개별 트레이너 카드 스타일 */
 .trainer-card {
 	position: relative;
 	overflow: hidden;
@@ -174,24 +193,29 @@ admin-card img {
 	background-color: #fff;
 }
 
+/* 숨겨진 트레이너 세부 정보 스타일 */
 .trainer-hidden-details {
 	display: none;
 }
 
+/* 마우스 호버 시 카드를 위로 살짝 이동하는 애니메이션 효과를 적용 */
 .trainer-card:hover {
 	transform: translateY(-3px);
 }
 
+/* 호버 시 이미지 확대 및 밝기 감소 효과를 추가 */
 .trainer-card:hover .trainer-image {
 	transform: scale(1.1);
 	filter: brightness(50%);
 }
 
+/* 호버 시 숨겨져 있던 이름을 표시 */
 .trainer-card:hover .trainer-name {
 	opacity: 1;
 	/* 호버 시 이름 표시 */
 }
 
+/* 마우스 호버 시 카드를 위로 살짝 이동하는 애니메이션 효과를 적용 */
 .trainer-card img {
 	display: block;
 	width: 100%;
@@ -199,6 +223,7 @@ admin-card img {
 	object-fit: cover;
 }
 
+/* 트레이너 카드 이미지 스타일 */
 .trainer-image {
 	width: 100%;
 	height: 400px;
@@ -231,6 +256,8 @@ admin-card img {
 	/* 기본적으로 숨김 */
 	transition: opacity 0.3s ease;
 	/* 부드럽게 나타남 */
+	line-height: 1.5;
+	/* 줄 간격 설정 (1.5배) */
 }
 
 /* 모달 스타일 */
@@ -247,9 +274,10 @@ admin-card img {
 	align-items: center;
 	justify-content: center;
 	opacity: 0;
-	/* 초기 투명도 */
+	transition: opacity 0.5s ease-in-out;
 }
 
+/* 모달 내부 컨테이너 레이아웃 스타일 */
 .modal-container {
 	display: flex;
 	flex-direction: row;
@@ -261,13 +289,10 @@ admin-card img {
 	overflow: hidden;
 }
 
+/* 모달 표시 및 애니메이션 효과 */
 .modal.show {
 	display: flex;
-	/* 모달 표시 */
 	opacity: 1;
-	/* 완전히 보이게 설정 */
-	transform: scale(1);
-	/* 원래 크기로 확대 */
 }
 
 /* 사이드바 스타일 */
@@ -276,6 +301,7 @@ admin-card img {
 	padding: 80px;
 }
 
+/* 탭 목록 기본 스타일 */
 .tabs {
 	list-style: none;
 	padding: 0;
@@ -303,8 +329,13 @@ admin-card img {
 	/* 호버 시 글씨 색상을 살짝 어두운 흰색으로 설정 */
 }
 
+/* 활성화된 탭의 효과 */
 .tab-item.active {
-	color: #fff;
+	animation: glow ease-in-out infinite alternate;
+	/* 활성화된 탭에 애니메이션 적용 */
+	animation-duration: .5s;
+	/* 빠른 전환 */
+	color: var(--pure-white);
 	/* 활성화된 탭의 글씨 색상 */
 	text-shadow:
 		0 0 10px #e0e0e0,
@@ -314,36 +345,7 @@ admin-card img {
 	/* 빛나는 효과 */
 }
 
-.tab-item.active {
-	animation: glow ease-in-out infinite alternate;
-	/* 활성화된 탭에 애니메이션 적용 */
-	animation-duration: .5s;
-	/* 빠른 전환 */
-}
-
-.trainer-list {
-	list-style-type: none;
-	padding: 0;
-}
-
-.trainer-item {
-	padding: 15px;
-	margin-bottom: 10px;
-	cursor: pointer;
-	border-radius: 5px;
-	transition: background-color 0.3s ease-in-out;
-}
-
-.trainer-item:hover {
-	background-color: #e1e1e1;
-}
-
-.trainer-item.active {
-	background-color: #f0f0f0;
-	color: #333;
-}
-
-
+/* 모달 콘텐츠의 크기, 애니메이션 및 투명도 효과 */
 .modal-content {
 	max-width: 98%;
 	max-height: 100vh;
@@ -353,6 +355,7 @@ admin-card img {
 	animation: fadeIn 0.5s forwards;
 }
 
+/* 모달 콘텐츠 컨테이너 레이아웃 설정 */
 .modal-content-container {
 	position: relative;
 	display: inline-block;
@@ -366,22 +369,24 @@ admin-card img {
 	overflow-y: auto;
 }
 
+/* 모달 내부 콘텐츠 기본 숨김 */
 .modal-content-container>div {
 	display: none;
-	/* 기본적으로 숨김 */
 }
 
+/* 활성화된 모달 콘텐츠 표시 */
 .modal-content-container>div.active {
 	display: block;
-	/* 활성화된 콘텐츠만 표시 */
 }
 
+/* 프로필 섹션 레이아웃 설정 */
 .profile-container {
 	display: flex;
 	gap: 20px;
 	height: 80vh;
 }
 
+/* 썸네일 이미지 리스트 레이아웃 및 스크롤 숨김 설정 */
 .thumbnails {
 	display: flex;
 	flex-direction: column;
@@ -398,11 +403,13 @@ admin-card img {
 	/* Firefox */
 }
 
+/* 썸네일 컨테이너의 스크롤바 숨김 */
 .thumbnails::-webkit-scrollbar {
 	display: none;
 	/* Chrome, Safari, Opera */
 }
 
+/* 썸네일 이미지 스타일 */
 .thumbnail-image {
 	width: 160px;
 	height: 160px;
@@ -415,11 +422,13 @@ admin-card img {
 	/* 마진 제거 (gap으로 간격 조절) */
 }
 
+/* 썸네일 이미지 호버 효과 */
 .thumbnail-image:hover {
 	transform: scale(1.05);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, .3);
 }
 
+/* 풀 이미지 컨테이너 레이아웃 설정 */
 .full-image-container {
 	flex-grow: 1;
 	display: flex;
@@ -429,6 +438,7 @@ admin-card img {
 	/* 컨테이너 높이에 맞춤 */
 }
 
+/* 풀 이미지 크기 및 비율 유지 설정 */
 #fullImage {
 	max-width: calc(100% - 5px);
 	/* 풀 이미지 너비 */
@@ -439,6 +449,7 @@ admin-card img {
 	/* 이미지 비율 유지 */
 }
 
+/* 트레이너 경력 이미지 스타일 */
 .trainer-career img {
 	width: 80%;
 	/* 이미지 크기를 80%로 줄임 */
@@ -451,6 +462,7 @@ admin-card img {
 	border-radius: 15px;
 }
 
+/* 트레이너 리뷰 이미지 스타일 */
 .trainer-review img {
 	width: 75%;
 	height: auto;
@@ -459,13 +471,7 @@ admin-card img {
 	border-radius: 15px;
 }
 
-.trainer-info {
-	max-width: 150px;
-	height: auto;
-	margin-top: 20px;
-	text-align: center;
-}
-
+/* 모달 프로필 이미지 스타일 */
 #modalProfileImage {
 	width: 150px;
 	height: 150px;
@@ -473,12 +479,14 @@ admin-card img {
 	margin-bottom: 20px;
 }
 
+/* 모달 리뷰 이미지 스타일 */
 #modalReviewImage {
 	width: 100%;
 	height: auto;
 	margin: 20px 0;
 }
 
+/* 인스타그램 아이콘 기본 스타일 */
 #instagramLink i {
 	font-size: 40px;
 	color: #E1306C;
@@ -486,10 +494,12 @@ admin-card img {
 	margin-right: 30px;
 }
 
+/* 인스타그램 아이콘 호버 스타일 */
 #instagramLink i:hover {
 	color: #C13584;
 }
 
+/* 모달 닫기 버튼 기본 스타일 */
 .close {
 	position: absolute;
 	top: -10px;
@@ -501,6 +511,7 @@ admin-card img {
 	cursor: pointer;
 }
 
+/* 모달 닫기 버튼 호버 및 포커스 스타일 */
 .close:hover,
 .close:focus {
 	color: #f1f1f1;
@@ -508,147 +519,160 @@ admin-card img {
 	cursor: pointer;
 }
 
-/* 반응형 스타일 추가 */
-@media (max-width: 1200px) {
-	.trainer-hero {
-		max-width: 95%;
-	}
+/* 스마트폰 환경 (화면 너비 576px 이하) */
+@media screen and (max-width: 576px) {
 
-	.trainers-grid {
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	}
-
-
-}
-
-@media (max-width: 768px) {
-	.admin-grid {
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.trainer-hero {
-		height: auto;
-		min-height: 20vh;
-		margin: 30px auto;
-		padding: 46px 15px;
-		max-width: 95%;
-		box-sizing: border-box;
-
-	}
-
-	.trainer-hero::before {
-		background-size: cover;
-
-	}
-
+	/* Hero 섹션 글자 크기와 크기 축소 */
 	.trainer-hero h1 {
-		font-size: 36px;
+		font-size: 35px;
+		/* 제목 크기 축소 */
 	}
 
 	.trainer-hero p {
-		font-size: 18px;
+		font-size: 17px;
+		/* 본문 텍스트 크기 축소 */
 	}
 
-	.trainers-grid {
-		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	.trainer-hero {
+		width: 350px;
+		padding: 0px 10px 10px 10px;
+		/* 전체적인 패딩 축소 */
+		min-height: 180px;
+		/* 최소 높이 축소 */
 	}
 
-	.trainer-card img {
-		height: 300px;
+	.trainer-hero::before {
+		background-size: 100%
 	}
 
-	.modal {
-		display: flex;
-		align-items: center;
+	/* Admin과 Trainer 그리드를 2열에서 1열로 변경 */
+	.admin-grid,
+	.trainer-cards-container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		/* 한 열로 변경 */
+		gap: 10px;
+		/* 간격 줄이기 */
+	}
+
+	.trainer-name {
+		font-size: 28px;
+	}
+
+	.trainer-career {
 		justify-content: center;
+		/* 수평 가운데 정렬 */
+		align-items: center;
+		/* 수직 가운데 정렬 */
+		height: 80vh;
+		/* 컨테이너 높이 설정 */
 	}
 
-	.modal-content-container {
-		position: relative;
-		width: 90%;
-		max-width: 400px;
-	}
-
-	.modal-content {
+	.trainer-career img {
 		width: 100%;
-		height: auto;
-		max-height: 80vh;
-		transition: transform 0.3s ease-out;
+		height: 70%;
+		align-items: center;
 	}
 
-	.modal-content.swiping {
-		transition: none;
+	.admin-image {
+		width: 165px;
+		height: 230px;
+		object-fit: cover;
+	}
+
+	.sidebar {
+		padding: 10px;
 	}
 
 	.close {
-		top: 10px;
-		right: 20px;
-		font-size: 30px;
 		display: none;
 	}
 
-	.prev-btn,
-	.next-btn {
-		display: none;
+	#instagramLink i {
+		position: absolute;
+		top: 0%;
+		/* 부모의 높이의 절반 */
+		right: 0%;
+		/* 부모의 너비의 절반 */
+		transform: translate(-50%, -50%);
+		/* 자신의 크기만큼 보정 */
+		z-index: 102r0;
+		/* 다른 요소보다 위에 표시 */
 	}
 
-	@media (max-width: 480px) {
-		.trainer-hero {
-			min-height: 20vh;
-			margin: 30px auto;
-			padding: 30px 10px;
-			max-width: 95%;
-			box-sizing: border-box;
-		}
+	/* 모달의 사이드탭 글자 크기 줄이기 */
+	.tab-item {
+		font-size: 12px;
+		/* 글자 크기 축소 */
+		padding: 10px;
+		/* 여백 줄이기 */
+		text-align: left;
+		/* 텍스트 왼쪽 정렬 */
+	}
 
-		.trainer-hero h1 {
-			font-size: 28px;
-		}
+	/* 프로필 섹션에서 썸네일 위로 이동 */
+	.profile-container {
+		flex-direction: column;
+		/* 세로 정렬 */
+		gap: 10px;
+	}
 
-		.trainer-hero p {
-			font-size: 16px;
-		}
+	.thumbnails {
+		display: flex;
+		flex-direction: row;
+	}
 
-		.trainers-grid {
-			grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-			gap: 10px;
-		}
+	.thumbnail-image {
+		order: -1;
+		/* 썸네일을 위로 이동 */
+		margin-bottom: 10px;
+		width: 100px;
+		height: 100px;
+		max-width: calc(100% - 20px);
+		/* 화면에 맞게 조정 */
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-		.trainer-card img {
-			height: 200px;
-		}
+	#fullImage {
+		max-width: calc(120% - 20px);
+		/* 풀 이미지도 화면에 맞게 조정 */
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
 
-		.modal-content-container {
-			width: 95%;
-		}
+	/* 나머지 사이드탭 레이아웃 (왼쪽 사이드탭, 오른쪽 메인 이미지) */
+	.modal-container {
+		flex-direction: column;
+		/* 세로 정렬로 변경 */
+		width: calc(100% - 20px);
+		/* 화면 너비에 맞춤 */
+		height: auto;
+		padding: 10px;
+	}
 
-		.modal-content {
-			max-height: 70vh;
-		}
+	.sidebar-tabs {
+		flex-basis: auto;
+		width: calc(100% - 20px);
+		/* 전체 너비 사용 */
+		margin-bottom: 10px;
+		text-align: center;
+	}
 
-		.instagram-button {
-			position: absolute;
-			bottom: 15px;
-			right: 15px;
-			z-index: 1001;
-		}
+	.main-image {
+		width: calc(100% - 20px);
+		text-align: center;
+	}
 
-		.instagram-icon {
-			width: 30px;
-			height: 30px;
-		}
-
-		.close {
-			top: 5px;
-			right: 10px;
-			font-size: 24px;
-			display: none;
-		}
-
-		.prev-btn,
-		.next-btn {
-			display: none;
-		}
+	.trainer-review img {
+		width: 100%;
 	}
 }
+
+/* 태블릿 */
+@media (min-width: 577px) and (max-width: 768px) {}
+
+/* 데스크탑 */
+@media (min-width: 769px) {}

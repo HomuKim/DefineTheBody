@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+
 	// 페이지 로드 후 fade-out 클래스 제거 (페이드 인 효과)
 	document.body.classList.remove('fade-out');
 
