@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// 링크 클릭 시 페이드 아웃 효과 적용
 	document.querySelectorAll('a').forEach(link => {
+
 		link.addEventListener('click', event => {
 			event.preventDefault(); // 기본 링크 동작 방지
 			const url = link.getAttribute('href');
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			return response.text();
 		})
 		.then(data => {
+			console.log("헤더 불러옴")
 			document.getElementById("header").innerHTML = data;
 		})
 		.catch(error => console.error(error));
@@ -40,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// 탭 전환 기능
 	document.querySelectorAll('.tab-item').forEach(tab => {
 		tab.addEventListener('click', function () {
+			console.log("탭전환 클릭")
 			// 활성 탭 업데이트
 			document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
 			this.classList.add('active');

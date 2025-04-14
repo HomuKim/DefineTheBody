@@ -570,8 +570,9 @@ admin-card img {
 
 	.trainer-career img {
 		width: 100%;
-		height: 70%;
+		height: 65%;
 		align-items: center;
+		padding: 60px 0px 60px 0px;
 	}
 
 	.admin-image {
@@ -590,9 +591,9 @@ admin-card img {
 
 	#instagramLink i {
 		position: absolute;
-		top: 0%;
+		top: 93%;
 		/* 부모의 높이의 절반 */
-		right: 0%;
+		right: 70%;
 		/* 부모의 너비의 절반 */
 		transform: translate(-50%, -50%);
 		/* 자신의 크기만큼 보정 */
