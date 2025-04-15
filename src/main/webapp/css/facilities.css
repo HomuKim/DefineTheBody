@@ -209,6 +209,8 @@ body.fade-out {
 		/* 전체적인 패딩 축소 */
 		min-height: 180px;
 		/* 최소 높이 축소 */
+		max-height: 175px;
+		/* 최대 높이 */
 	}
 
 	.tab-item {

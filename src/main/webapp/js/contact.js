@@ -111,17 +111,17 @@ $(document).ready(function () {
 	// 페이지 로드 후 fade-out 클래스 제거
 	document.body.classList.remove('fade-out');
 
-	 // 링크 클릭 시 페이드 아웃 효과 적용
-	 document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', event => {
-            event.preventDefault(); 
-            const url = link.getAttribute('href');
-            document.body.classList.add('fade-out');
-            setTimeout(() => {
-                window.location.href = url;
-            }, 700);
-        });
-    });
+	// 링크 클릭 시 페이드 아웃 효과 적용
+	document.querySelectorAll('a').forEach(link => {
+		link.addEventListener('click', event => {
+			event.preventDefault();
+			const url = link.getAttribute('href');
+			document.body.classList.add('fade-out');
+			setTimeout(() => {
+				window.location.href = url;
+			}, 700);
+		});
+	});
 
 	// 네이버맵 모달 관련
 	$('#mapModal .close').on('click', closeMapModal);
@@ -147,11 +147,7 @@ $(document).ready(function () {
 		window.open('https://talk.naver.com/ct/w5u13y?frm=pnmb&frm=nmb_detail#nafullscreen');
 	});
 
-	// 관리자 로그인 확인 및 헤더/푸터 로드
-	if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-		$('body').addClass('admin-logged-in');
-		makeContentEditable(true);
-	}
+	// 헤더/푸터 동적 로드
 	$("#header").load("header.html", function () {
 		// 헤더 로드 완료 후 실행될 코드
 		if (typeof initializeHeader === 'function') {
@@ -159,4 +155,5 @@ $(document).ready(function () {
 		}
 	});
 	$("#footer").load("footer.html");
+
 });

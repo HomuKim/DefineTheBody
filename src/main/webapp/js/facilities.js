@@ -18,26 +18,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	// 헤더/푸터 동적 로드
-	fetch("header.html")
-		.then(response => {
-			if (!response.ok) throw new Error("헤더를 로드할 수 없습니다.");
-			return response.text();
-		})
-		.then(data => {
-			console.log("헤더 불러옴")
-			document.getElementById("header").innerHTML = data;
-		})
-		.catch(error => console.error(error));
-
-	fetch("footer.html")
-		.then(response => {
-			if (!response.ok) throw new Error("푸터를 로드할 수 없습니다.");
-			return response.text();
-		})
-		.then(data => {
-			document.getElementById("footer").innerHTML = data;
-		})
-		.catch(error => console.error(error));
+	$("#header").load("header.html", function () {
+		// 헤더 로드 완료 후 실행될 코드
+		if (typeof initializeHeader === 'function') {
+			initializeHeader();
+		}
+	});
+	$("#footer").load("footer.html");
 
 	// 탭 전환 기능
 	document.querySelectorAll('.tab-item').forEach(tab => {

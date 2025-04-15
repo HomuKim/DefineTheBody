@@ -383,28 +383,27 @@ body.fade-out {
 	}
 }
 
-@media (max-width: 768px) {
-	.contact-hero {
-		height: auto;
-		min-height: 20vh;
-		margin: 30px auto;
-		padding: 61px 15px;
-		max-width: 95%;
-		box-sizing: border-box;
-	}
+@media screen and (max-width: 576px) {
 
-	.contact-hero::before {
-		background-size: cover;
-	}
-
+	/* Hero 섹션 글자 크기와 크기 축소 */
 	.contact-hero h1 {
-		font-size: 32px;
-		margin-bottom: 15px;
+		font-size: 34px;
+		/* 제목 크기 축소 */
 	}
 
 	.contact-hero p {
 		font-size: 16px;
-		margin-bottom: 20px;
+		/* 본문 텍스트 크기 축소 */
+	}
+
+	.contact-hero {
+		width: 350px;
+		padding: 0px 10px 10px 10px;
+		/* 전체적인 패딩 축소 */
+		min-height: 180px;
+		/* 최소 높이 축소 */
+		max-height: 175px;
+		/* 최대 높이 */
 	}
 
 	.contact-grid {

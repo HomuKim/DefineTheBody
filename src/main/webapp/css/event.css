@@ -148,19 +148,26 @@ body.fade-out {
 }
 
 @media (max-width: 768px) {
-	.event-hero {
-		min-height: 20vh;
-		margin: 30px auto;
-		padding: 43px 15px;
-		max-width: 95%;
-	}
 
+	/* Hero 섹션 글자 크기와 크기 축소 */
 	.event-hero h1 {
-		font-size: 36px;
+		font-size: 23px;
+		/* 제목 크기 축소 */
 	}
 
 	.event-hero p {
-		font-size: 16px;
+		font-size: 17px;
+		/* 본문 텍스트 크기 축소 */
+	}
+
+	.event-hero {
+		width: 350px;
+		padding: 0px 10px 10px 10px;
+		/* 전체적인 패딩 축소 */
+		min-height: 180px;
+		/* 최소 높이 축소 */
+		max-height: 175px;
+		/* 최대 높이 */
 	}
 
 	.event-content {
