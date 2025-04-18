@@ -193,10 +193,10 @@ header {
 		right: -100%;
 		width: 80%;
 		max-width: 100px;
-		height: 27vh;
+		height: 36vh;
 		background-color: rgba(255, 255, 255, 0.7);
 		backdrop-filter: blur(10px);
-		padding: 10px 10px 10px 3px;
+		padding: 5px 10px 10px 3px;
 		transition: 0.3s ease-in-out;
 		z-index: 998;
 		flex-direction: column;
@@ -208,7 +208,8 @@ header {
 	}
 
 	.nav-links.active {
-		right: 17px;
+		right: 9px;
+		top:-10px
 	}
 
 	.nav-links li {

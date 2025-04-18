@@ -105,7 +105,7 @@ body.fade-out {
 	width: 85%;
 	/* 사이드바를 제외한 나머지 공간 차지 */
 	padding: 0px 30px 0px 40px;
-	min-height: 2000px;
+	min-height: 500px;
 }
 
 /* 탭 리스트 스타일 */
@@ -188,3 +188,38 @@ body.fade-out {
 	opacity: 1;
 	transition-delay: 0s;
 }
+
+/* 스마트폰 환경 (화면 너비 576px 이하) */
+@media screen and (max-width: 576px) {
+
+	/* Hero 섹션 글자 크기와 크기 축소 */
+	.facility-hero h1 {
+		font-size: 28px;
+		/* 제목 크기 축소 */
+	}
+
+	.facility-hero p {
+		font-size: 17px;
+		/* 본문 텍스트 크기 축소 */
+	}
+
+	.facility-hero {
+		width: 350px;
+		padding: 0px 10px 10px 10px;
+		/* 전체적인 패딩 축소 */
+		min-height: 180px;
+		/* 최소 높이 축소 */
+		max-height: 175px;
+		/* 최대 높이 */
+	}
+
+	.tab-item {
+		padding: 0px 0px 10px 5px;
+	}
+}
+
+/* 태블릿 */
+@media (min-width: 577px) and (max-width: 768px) {}
+
+/* 데스크탑 */
+@media (min-width: 769px) {}

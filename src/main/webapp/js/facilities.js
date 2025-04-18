@@ -1,19 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 	// 페이지 로드 후 fade-out 클래스 제거 (페이드 인 효과)
-	document.body.classList.remove('fade-out');
+	setTimeout(() => {
+		document.body.classList.remove('fade-out');
+	}, 10);
 
 	// 링크 클릭 시 페이드 아웃 효과 적용
 	document.querySelectorAll('a').forEach(link => {
-
 		link.addEventListener('click', event => {
-			event.preventDefault(); // 기본 링크 동작 방지
+			if (document.body.classList.contains('fade-out')) return; // 중복 방지
+			event.preventDefault();
 			const url = link.getAttribute('href');
-
-			document.body.classList.add('fade-out'); // 페이드 아웃 효과 시작
+			document.body.classList.add('fade-out');
 			setTimeout(() => {
-				window.location.href = url; // 페이지 이동
-			}, 700); // CSS transition-duration과 동일한 시간 설정
+				window.location.href = url;
+			}, 700);
 		});
 	});
 

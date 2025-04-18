@@ -1,45 +1,36 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 	// 페이지 로드 후 fade-out 클래스 제거 (페이드 인 효과)
-	document.body.classList.remove('fade-out');
+	setTimeout(() => {
+		document.body.classList.remove('fade-out');
+	}, 10);
 
 	// 링크 클릭 시 페이드 아웃 효과 적용
 	document.querySelectorAll('a').forEach(link => {
 		link.addEventListener('click', event => {
-			event.preventDefault(); // 기본 링크 동작 방지
+			if (document.body.classList.contains('fade-out')) return; // 중복 방지
+			event.preventDefault();
 			const url = link.getAttribute('href');
-
-			document.body.classList.add('fade-out'); // 페이드 아웃 효과 시작
+			document.body.classList.add('fade-out');
 			setTimeout(() => {
-				window.location.href = url; // 페이지 이동
-			}, 700); // CSS transition-duration과 동일한 시간 설정
+				window.location.href = url;
+			}, 700);
 		});
 	});
 
 	// 헤더/푸터 동적 로드
-	fetch("header.html")
-		.then(response => {
-			if (!response.ok) throw new Error("헤더를 로드할 수 없습니다.");
-			return response.text();
-		})
-		.then(data => {
-			document.getElementById("header").innerHTML = data;
-		})
-		.catch(error => console.error(error));
-
-	fetch("footer.html")
-		.then(response => {
-			if (!response.ok) throw new Error("푸터를 로드할 수 없습니다.");
-			return response.text();
-		})
-		.then(data => {
-			document.getElementById("footer").innerHTML = data;
-		})
-		.catch(error => console.error(error));
+	$("#header").load("header.html", function () {
+		// 헤더 로드 완료 후 실행될 코드
+		if (typeof initializeHeader === 'function') {
+			initializeHeader();
+		}
+	});
+	$("#footer").load("footer.html");
 
 	// 탭 전환 기능
 	document.querySelectorAll('.tab-item').forEach(tab => {
 		tab.addEventListener('click', function () {
+			console.log("탭전환 클릭")
 			// 활성 탭 업데이트
 			document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
 			this.classList.add('active');

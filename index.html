@@ -33,31 +33,27 @@
 			<!-- 기능 카드: 각 페이지로 연결되는 링크 -->
 			<div class="feature-cards reveal">
 				<div>
-					<h1 class="reveal">당신의 건강을 위한 특별한 혜택!<br> 지금 진행 중인 다양한 이벤트를 확인하고, 건강한 삶의 첫걸음을 더 즐겁게 시작하세요.</h1>
-					<a href="event.html" class="card reveal">
-						<h3 class="editable" contenteditable="false">이벤트</h3>
-						<p class="editable" contenteditable="false">디파인더바디만의 <br>다양한 이벤트와 프로모션을 확인하세요</p>
+					<a href="event.html" class="card card-event">
+						<h3 class="editable" contenteditable="false">EVENT</h3>
+						<p class="editable" contenteditable="false">디파인더바디의<br>이벤트와 프로모션을<br> 확인하세요</p>
 					</a>
 				</div>
 				<div>
-					<h1 class="reveal">전문성과 열정을 겸비한 트레이너 팀을 만나보세요!<br> 당신의 목표를 함께 이루어 줄 최고의 파트너들이 기다리고 있습니다.</h1>
-					<a href="trainers.html" class="card reveal">
-						<h3 class="editable" contenteditable="false">팀원 소개</h3>
-						<p class="editable" contenteditable="false">디파인더바디의 <br>스태프들을 만나보세요</p>
+					<a href="trainers.html" class="card card-staff">
+						<h3 class="editable" contenteditable="false">STAFF</h3>
+						<p class="editable" contenteditable="false">디파인더바디의<br>열정적인 스태프들을<br>만나보세요</p>
 					</a>
 				</div>
 				<div>
-					<h1 class="reveal">최상의 운동 환경을 제공합니다! 최신식 장비와 쾌적한 공간에서 당신의 운동 효율을 극대화하세요.</h1>
-					<a href="facilities.html" class="card reveal">
-						<h3 class="editable" contenteditable="false">시설 소개</h3>
-						<p class="editable" contenteditable="false">디파인더바디의 <br>최신 장비와 쾌적한 환경을 경험하세요</p>
+					<a href="facilities.html" class="card card-gym">
+						<h3 class="editable" contenteditable="false">GYM</h3>
+						<p class="editable" contenteditable="false">디파인더바디의<br>최신 장비와 쾌적한<br>환경을 경험하세요</p>
 					</a>
 				</div>
 				<div>
-					<h1 class="reveal">언제나 고객님의 목소리에 귀 기울입니다. 궁금한 점이나 불편 사항은 언제든 문의하세요. 친절하고 신속하게 도와드리겠습니다.</h1>
-					<a href="contact.html" class="card reveal">
-						<h3 class="editable" contenteditable="false">고객 지원</h3>
-						<p class="editable" contenteditable="false">디파인더바디에게 <br>궁금한 점이 있으면 문의해주세요</p>
+					<a href="contact.html" class="card card-contact">
+						<h3 class="editable" contenteditable="false">CONTACT US</h3>
+						<p class="editable" contenteditable="false">디파인더바디에게<br>궁금한 점이 있으면<br>문의해주세요</p>
 					</a>
 				</div>
 			</div>
@@ -66,19 +62,6 @@
 
 	<!-- 푸터 영역 (외부 파일에서 로드) -->
 	<div id="footer"></div>
-	<script>
-		$(document).ready(function () {
-			$(".hero-section").fadeIn(1000); // 1000ms 동안 페이드인
-		});
-
-		// ScrollReveal 초기화
-		ScrollReveal().reveal('.reveal', {
-			duration: 1000,
-			distance: '50px',
-			origin: 'bottom',
-			interval: 200,
-		});
-	</script>
 </body>
 
 </html>

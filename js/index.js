@@ -51,6 +51,18 @@ function showSlides() {
 document.addEventListener('DOMContentLoaded', function () {
 	const elements = document.querySelectorAll('.animate-sequence');
 
+	$(document).ready(function () {
+		$(".hero-section").fadeIn(1000); // 1000ms 동안 페이드인
+	});
+
+	ScrollReveal().reveal('.reveal', {
+		duration: 1000,
+		distance: '50px',
+		origin: 'bottom',
+		interval: 200,
+		viewFactor: 0.3, // 요소가 30% 보이면 애니메이션 시작
+		viewOffset: { top: 50, bottom: 0, left: 0, right: 0 } // 뷰포트 상단에서 50px 더 내려와야 실행
+	});
 
 	//fade-out 클래스 제거
 	document.body.classList.remove('fade-out');

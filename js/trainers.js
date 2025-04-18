@@ -79,8 +79,25 @@ function loadHeaderFooter() {
 		if (status === 'error') {
 			console.error('헤더 로드 실패');
 			$('#header').html('<p>기본 헤더</p>');
-		} else if (typeof initializeHeader === 'function') {
-			initializeHeader();
+		} else {
+			let prevScrollTop = 0;
+			const header = document.getElementById('header');
+
+			window.addEventListener('scroll', function () {
+				let nextScrollTop = window.pageYOffset || 0;
+				if (nextScrollTop > prevScrollTop) {
+					// 스크롤 내릴 때
+					header.classList.add('scrollDown');
+				} else {
+					// 스크롤 올릴 때
+					header.classList.remove('scrollDown');
+				}
+				prevScrollTop = nextScrollTop;
+			});
+
+			if (typeof initializeHeader === 'function') {
+				initializeHeader();
+			}
 		}
 	});
 	$('#footer').load('footer.html');
