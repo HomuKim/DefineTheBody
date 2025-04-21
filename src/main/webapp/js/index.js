@@ -1,125 +1,52 @@
-// 슬라이드 인덱스 초기화
-let slideIndex = 0;
-let slides;
-let lastScrollTop = 0;
-
-
-function throttle(callback, limit) {
-	let waiting = false;
-	return function () {
-		if (!waiting) {
-			callback.apply(this, arguments);
-			waiting = true;
-			setTimeout(() => (waiting = false), limit);
-		}
-	};
-}
-
-// 유효한 이미지만 필터링하는 함수
-function filterValidImages() {
-	return Array.from(slides).filter(slide => {
-		return slide.complete && slide.naturalHeight !== 0;
-	});
-}
-
-// 슬라이드쇼 기능
-function showSlides() {
-	const validSlides = filterValidImages();
-
-	if (validSlides.length === 0) return;
-
-	// 모든 슬라이드 숨기기
-	validSlides.forEach(slide => {
-		slide.style.display = "none";
-		slide.classList.remove('active');
-	});
-
-	// 다음 슬라이드 표시
-	slideIndex++;
-	if (slideIndex > validSlides.length) {
-		slideIndex = 1;
-	}
-
-	validSlides[slideIndex - 1].style.display = "block";
-	validSlides[slideIndex - 1].classList.add('active');
-
-	// 7초 후 다음 슬라이드로 전환
-	setTimeout(showSlides, 7000);
-}
-
-// DOM 로드 완료 시 실행되는 함수
+// DOM 로드 완료 시 실행되는 핵심 함수
 document.addEventListener('DOMContentLoaded', function () {
-	const elements = document.querySelectorAll('.animate-sequence');
+    
+	// 1. 순차 애니메이션 요소 선택
+    const elements = document.querySelectorAll('.animate-sequence');
 
-	$(document).ready(function () {
-		$(".hero-section").fadeIn(1000); // 1000ms 동안 페이드인
-	});
+    // 2. 히어로 섹션 페이드인 효과
+    $(document).ready(function () {
+        $(".hero-section").fadeIn(1000); // 1000ms 동안 서서히 나타남
+    });
 
-	ScrollReveal().reveal('.reveal', {
-		duration: 1000,
-		distance: '50px',
-		origin: 'bottom',
-		interval: 200,
-		viewFactor: 0.3, // 요소가 30% 보이면 애니메이션 시작
-		viewOffset: { top: 50, bottom: 0, left: 0, right: 0 } // 뷰포트 상단에서 50px 더 내려와야 실행
-	});
+    // 3. 스크롤 애니메이션 초기화
+    ScrollReveal().reveal('.reveal', {
+        duration: 1000,         // 1초 동안 애니메이션
+        distance: '50px',       // 이동 거리
+        origin: 'bottom',       // 아래쪽에서 등장
+        interval: 200,          // 요소간 200ms 간격으로 순차 실행
+        viewFactor: 0.3,        // 요소가 30% 보일 때 애니메이션 트리거
+        viewOffset: { top: 30 } // 뷰포트 상단에서 30px 더 내려와야 실행
+    });
 
-	//fade-out 클래스 제거
-	document.body.classList.remove('fade-out');
+    // 4. 초기 페이드아웃 효과 제거
+    document.body.classList.remove('fade-out');
 
-	// 헤더와 푸터 로드
-	$("#header").load("header.html", function () {
-		if (typeof initializeHeader === 'function') {
-			initializeHeader();
-		}
-	});
-	$("#footer").load("footer.html");
+    // 5. 헤더/푸터 동적 로드
+    $("#header").load("header.html", function () {
+        if (typeof initializeHeader === 'function') {
+            initializeHeader(); // 헤더 초기화 함수 호출(header.html에 정의 필요)
+        }
+    });
+    $("#footer").load("footer.html"); // 푸터 단순 로드
 
-	// 이벤트 배너 이미지 동적 로드
-	const slider = document.getElementById('eventSlider');
-	const imageUrls = [
-		'images/event/event-banner1.jpg',
-		'images/event/event-banner2.jpg',
-		'images/event/event-banner3.jpg',
-		'images/event/event-banner4.jpg'
-	];
-
-	function loadImage(url) {
-		return new Promise((resolve, reject) => {
-			const img = new Image();
-			img.onload = () => resolve(img);
-			img.onerror = reject;
-			img.src = url;
-			img.alt = '이벤트 배너';
-			img.className = 'event-image editable';
-		});
-	}
-
-	Promise.all(imageUrls.map(url => loadImage(url).catch(() => null)))
-		.then(images => {
-			images.filter(img => img !== null).forEach(img => {
-				slider.appendChild(img);
-			});
-			slides = document.querySelectorAll('.event-image');
-			showSlides();
-		});
-
-	elements.forEach((el, index) => {
-		setTimeout(() => {
-			el.classList.add('active'); // 순서대로 active 클래스 추가
-		}, index * 700); // 각 요소마다 500ms 간격으로 애니메이션 실행
-	});
+    // 6. 순차 애니메이션 실행
+    elements.forEach((el, index) => {
+        setTimeout(() => {
+            el.classList.add('active'); // 700ms 간격으로 요소 활성화
+        }, index * 700);
+    });
 });
 
-// 링크 클릭 시 페이드 아웃 효과 적용
+// 7. 페이지 전환 페이드아웃 효과
 document.querySelectorAll('a').forEach(link => {
-	link.addEventListener('click', event => {
-		event.preventDefault(); // 기본 링크 동작 방지
-		const url = link.getAttribute('href');
+    link.addEventListener('click', event => {
+        event.preventDefault(); // 기본 링크 동작 차단
+        const url = link.getAttribute('href');
 
-		document.body.classList.add('fade-out'); // 페이드 아웃 효과 시작
-		setTimeout(() => {
-			window.location.href = url; // 페이지 이동
-		}, 700); // CSS transition-duration과 동일한 시간 설정
-	});
+        document.body.classList.add('fade-out'); // 페이드아웃 시작
+        setTimeout(() => {
+            window.location.href = url; // 700ms 후 페이지 이동
+        }, 700);
+    });
 });

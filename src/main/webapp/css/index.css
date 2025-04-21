@@ -214,10 +214,12 @@ body.fade-out {
 
 .card-event {
 	background-image: url('image/index/event.jpg');
+	background-size: cover;
 }
 
 .card-staff {
 	background-image: url('image/index/staff.jpg');
+	background-size: cover;
 }
 
 .card-gym {
@@ -227,6 +229,7 @@ body.fade-out {
 
 .card-contact {
 	background-image: url('/images/index/contact.jpg');
+	background-size: cover;
 }
 
 @media screen and (max-width: 576px) {
