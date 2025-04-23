@@ -1,52 +1,58 @@
-// DOM 로드 완료 시 실행되는 핵심 함수
 document.addEventListener('DOMContentLoaded', function () {
-    
-	// 1. 순차 애니메이션 요소 선택
-    const elements = document.querySelectorAll('.animate-sequence');
+    // 1. 히어로 섹션 페이드인
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        heroSection.style.display = 'flex'; // fadeIn 효과 대체 (jQuery 미사용)
+        heroSection.style.opacity = 0;
+        setTimeout(() => {
+            heroSection.style.transition = 'opacity 1s';
+            heroSection.style.opacity = 1;
+        }, 10);
+    }
 
-    // 2. 히어로 섹션 페이드인 효과
-    $(document).ready(function () {
-        $(".hero-section").fadeIn(1000); // 1000ms 동안 서서히 나타남
-    });
-
-    // 3. 스크롤 애니메이션 초기화
+    // 2. 스크롤 애니메이션
     ScrollReveal().reveal('.reveal', {
-        duration: 1000,         // 1초 동안 애니메이션
-        distance: '50px',       // 이동 거리
-        origin: 'bottom',       // 아래쪽에서 등장
-        interval: 200,          // 요소간 200ms 간격으로 순차 실행
-        viewFactor: 0.3,        // 요소가 30% 보일 때 애니메이션 트리거
-        viewOffset: { top: 30 } // 뷰포트 상단에서 30px 더 내려와야 실행
+        duration: 800,
+        distance: '40px',
+        origin: 'bottom',
+        interval: 120,
+        viewFactor: 0.2,
+        viewOffset: { top: 20, bottom: 0, left: 0, right: 0 }
     });
 
-    // 4. 초기 페이드아웃 효과 제거
+    // 3. 페이드아웃 클래스 제거
     document.body.classList.remove('fade-out');
 
-    // 5. 헤더/푸터 동적 로드
-    $("#header").load("header.html", function () {
-        if (typeof initializeHeader === 'function') {
-            initializeHeader(); // 헤더 초기화 함수 호출(header.html에 정의 필요)
-        }
-    });
-    $("#footer").load("footer.html"); // 푸터 단순 로드
+    // 4. 헤더/푸터 비동기 로드 (필요하면)
+    fetch('header.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('header').innerHTML = html;
+            if (typeof initializeHeader === 'function') initializeHeader();
+        });
+    fetch('footer.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('footer').innerHTML = html;
+        });
 
-    // 6. 순차 애니메이션 실행
-    elements.forEach((el, index) => {
-        setTimeout(() => {
-            el.classList.add('active'); // 700ms 간격으로 요소 활성화
-        }, index * 700);
+    // 5. 순차 애니메이션 (CSS로 대체 가능)
+    document.querySelectorAll('.animate-sequence').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.5}s`;
+        el.classList.add('active');
     });
-});
 
-// 7. 페이지 전환 페이드아웃 효과
-document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', event => {
-        event.preventDefault(); // 기본 링크 동작 차단
+    // 6. 페이지 전환 페이드아웃 (내부 링크에만 적용)
+    document.querySelectorAll('a[href]').forEach(link => {
         const url = link.getAttribute('href');
-
-        document.body.classList.add('fade-out'); // 페이드아웃 시작
-        setTimeout(() => {
-            window.location.href = url; // 700ms 후 페이지 이동
-        }, 700);
+        if (url && !url.startsWith('http')) { // 내부 링크만
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 700);
+            });
+        }
     });
 });

@@ -42,7 +42,9 @@ body.fade-out {
 	color: white;
 	display: flex;
 	align-items: center;
+	/* 수직 중앙 정렬 */
 	justify-content: center;
+	/* 수평 중앙 정렬 */
 	border-top: 1px solid rgba(255, 255, 255, 0.2);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 20px;
@@ -106,8 +108,6 @@ body.fade-out {
 .animate-sequence {
 	opacity: 0;
 	/* 처음에 숨김 */
-	transform: translateY(20px);
-	/* 아래에서 위로 이동 */
 	transition: opacity 0.8s ease, transform 0.6s ease;
 	/* 애니메이션 효과 */
 }
@@ -115,8 +115,6 @@ body.fade-out {
 .animate-sequence.active {
 	opacity: 1;
 	/* 보임 */
-	transform: translateY(0);
-	/* 원래 위치로 이동 */
 }
 
 /* 스크롤 애니메이션 효과 */
@@ -132,8 +130,7 @@ body.fade-out {
 	/* 세로 정렬 */
 	align-items: center;
 	/* 중앙 정렬 */
-	max-width: 100%;
-	/* 전체 너비 사용 */
+	width: 1200px;
 	margin: 20px auto;
 	/* 가운데 정렬 */
 	gap: 20px;
@@ -151,9 +148,7 @@ body.fade-out {
 	max-width: 1200px;
 	/* 최대 너비 제한 */
 	margin: 0 auto;
-	gap: 20px;
 	max-width: 1200px;
-	margin: 0 auto;
 }
 
 .card {
@@ -172,8 +167,8 @@ body.fade-out {
 	background-position: center;
 	background-repeat: no-repeat;
 	overflow: hidden;
-	min-height: 200px;
-	min-width: 205px;
+	height: 200px;
+	width: 205px;
 	flex-basis: 300px;
 }
 
@@ -245,4 +240,44 @@ body.fade-out {
 	.hero-section p {
 		font-size: 28px
 	}
+
+	/* 콘텐츠 섹션 스타일 */
+	.content-section {
+		align-items: center;
+		/* 중앙 정렬 */
+		max-width: 100%;
+		/* 전체 너비 사용 */
+	}
+
+	.feature-cards {
+		grid-template-columns: 1fr;
+		display: grid;
+		gap: 10px;
+		margin: 0 auto;
+		max-width: 100%;
+        width: 100vw;           /* 뷰포트 전체 너비 */
+		place-items: center;
+		margin-left: calc(-50vw + 50%); /* 화면 중앙에서 좌우로 꽉 차게 */
+	}
+
+	.card {
+        width: 98vw;           /* 카드가 뷰포트 전체 너비 */
+		min-width: 0;
+		box-sizing: border-box;
+		height: 180px;
+		padding-top: 24px;      /* 위쪽 여백을 늘림 */
+		padding-bottom: 30px;   /* 아래쪽 여백을 줄임 */
+	}
+
+	.card h3 {
+		font-size: 28px;
+	}
+
+	.card p {
+		font-size: 16px;
+		word-break: keep-all;      /* 한글 자연스러운 줄바꿈 */
+		overflow-wrap: break-word; /* 영어 단어가 길 때 줄바꿈 */
+		white-space: normal;       /* 줄바꿈 허용 */
+	}
+
 }
