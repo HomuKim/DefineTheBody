@@ -23,18 +23,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // 3. 페이드아웃 클래스 제거
     document.body.classList.remove('fade-out');
 
-    // 4. 헤더/푸터 비동기 로드 (필요하면)
-    fetch('header.html')
-        .then(res => res.text())
-        .then(html => {
-            document.getElementById('header').innerHTML = html;
-            if (typeof initializeHeader === 'function') initializeHeader();
-        });
-    fetch('footer.html')
-        .then(res => res.text())
-        .then(html => {
-            document.getElementById('footer').innerHTML = html;
-        });
+    // 4. 헤더와 푸터 로드 함수
+	$("#header").load("header.html", function () {
+		// 헤더 로드 완료 후 실행될 코드
+		if (typeof initializeHeader === 'function') {
+			initializeHeader();
+		}
+	});
+	$("#footer").load("footer.html");
 
     // 5. 순차 애니메이션 (CSS로 대체 가능)
     document.querySelectorAll('.animate-sequence').forEach((el, i) => {

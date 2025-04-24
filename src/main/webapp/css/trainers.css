@@ -593,9 +593,9 @@ admin-card img {
 
 	#instagramLink i {
 		position: absolute;
-		top: 93%;
+		top: 97%;
 		/* 부모의 높이의 절반 */
-		right: 70%;
+		right: 72%;
 		/* 부모의 너비의 절반 */
 		transform: translate(-50%, -50%);
 		/* 자신의 크기만큼 보정 */

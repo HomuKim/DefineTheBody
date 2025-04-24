@@ -261,7 +261,7 @@ body.fade-out {
 	}
 
 	.card {
-        width: 98vw;           /* 카드가 뷰포트 전체 너비 */
+        width: 98vw;           /* 뷰포트 기준 98% */
 		min-width: 0;
 		box-sizing: border-box;
 		height: 180px;
