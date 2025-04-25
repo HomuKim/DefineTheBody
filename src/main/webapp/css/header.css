@@ -207,7 +207,7 @@ header {
 
 	.nav-links.active {
 		right: 10px;
-		top:-10px
+		top: -10px
 	}
 
 	.nav-links li {
@@ -228,6 +228,7 @@ header {
 		font-weight: bold;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
+		font-size: 19px;
 	}
 
 	.nav-links a:hover {
