@@ -43,6 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
             image: 'images/event/event-banner2.jpg',
             title: '[SPECIAL COMBO 이벤트]',
             description: '회원권 + 그룹PT + 개인PT<br>한 번에! 제대로! 알차게!<br><br>✨디파인더바디짐이 준비한<br>스페셜 콤보 패키지 출시!<br><br>⸻<br><br>구성<br>📌 헬스 회원권 4개월<br>📌 그룹PT 8회<br>📌 1:1 개인PT 2회<br><br>→ 총 408,000원!<br><br>⸻<br><br>헬스장 등록도 하고,<br>PT도 부담 없이 체험하고,<br>그룹 운동으로 재미까지!<br>지금이 바로 운동 루틴 잡을 타이밍!'
+        },
+        {
+            image: 'images/event/event-banner3.png',
+            title: '✅ [친구소개 EVENT 진행 중!]',
+            description: '디파인더바디짐에서 함께 운동할 친구 있으신가요?<br>지금 소개해주시면 선물은 저희가 준비할게요!<br><br>⸻<br><br>🎁 이벤트 혜택<br><br>👥 1명 소개 시<br>→ 리유저블 텀블러 증정!<br>(기존회원 & 신규회원 모두 증정)<br><br>👥 3명 이상 소개 시<br>→ 손목 스트랩 or 폼롤러 택 1 증정!<br>(기존회원 대상)<br><br>⸻<br><br>💪 주변에 운동 같이 시작하고 싶은 분 계시다면<br>지금 디파인더바디짐으로 초대해주세요!'
         }
     ];
 
