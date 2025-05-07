@@ -50,7 +50,7 @@ header {
 .logo-text {
 	font-family: 'Arial Black', sans-serif;
 	font-weight: 900;
-	font-size: 23px;
+	font-size: 30px;
 	color: #333;
 	transform: skew(-10deg);
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -85,7 +85,7 @@ header {
 	color: var(--secondary-black);
 	text-decoration: none;
 	font-weight: 700;
-	font-size: 23px;
+	font-size: 20px;
 	padding: 8px 12px;
 	transition: all 0.3s ease;
 	position: relative;
