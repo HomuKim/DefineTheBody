@@ -310,13 +310,13 @@ admin-card img {
 
 .tab-item,
 .tab-item a {
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    padding: 15px 10px;
-    color: #333;
-    transition: all 0.3s ease;
-    cursor: pointer;
+	font-size: 40px;
+	font-weight: bold;
+	text-align: center;
+	padding: 15px 10px;
+	color: #333;
+	transition: all 0.3s ease;
+	cursor: pointer;
 	text-decoration: none;
 }
 
