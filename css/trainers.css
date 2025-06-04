@@ -119,7 +119,7 @@ body.modal-open {
 	transition: transform 0.3s ease;
 	/* 부드러운 이동 효과 */
 	line-height: 0;
-	background-color: #fff;
+	background: linear-gradient(135deg, #090404 0%, #968a8a 100%);
 }
 
 /* 관리자 카드 이미지 스타일 */
@@ -190,7 +190,7 @@ admin-card img {
 	cursor: pointer;
 	transition: transform 0.3s ease;
 	line-height: 0;
-	background-color: #fff;
+	background: linear-gradient(135deg, #090404 0%, #968a8a 100%);
 }
 
 /* 숨겨진 트레이너 세부 정보 스타일 */
