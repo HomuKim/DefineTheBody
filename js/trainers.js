@@ -71,6 +71,54 @@ $(document).ready(function () {
 		$(`.modal-content-container > div[data-trainer="${tabIndex}"]`).show();
 	});
 
+	// 트레이너 카드 반복 이미지 자동 생성
+	$('.trainer-card').each(function () {
+		const card = $(this);
+		const thumbnailImg = card.find('.trainer-image').attr('src');
+		const match = thumbnailImg.match(/member\/([^\/]+)/);
+		const folder = match ? match[1] : null;
+
+		// 프로필 이미지 생성
+		const profileImagesContainer = card.find('.trainer-profile-images');
+		if (profileImagesContainer.length && folder) {
+			profileImagesContainer.empty();
+			// 충분히 큰 최대치로 반복
+			for (let i = 1; i <= 10; i++) {
+				const imgSrc = `images/member/${folder}/profile${i}.jpg`;
+				const img = new Image();
+				img.onload = function () {
+					profileImagesContainer.append(
+						`<img src="${imgSrc}" alt="프로필 이미지 ${i}" class="trainer-profile-image">`
+					);
+				};
+				img.onerror = function () {
+					// 이미지가 없으면 아무것도 하지 않음
+				};
+				img.src = imgSrc;
+			}
+		}
+
+		// 후기 이미지 생성
+		const reviewImagesContainer = card.find('.trainer-review-images');
+		if (reviewImagesContainer.length && folder) {
+			reviewImagesContainer.empty();
+			// 충분히 큰 최대치로 반복 (예: 12장까지 시도)
+			for (let i = 1; i <= 30; i++) {
+				const imgSrc = `images/member/${folder}/review${i}.jpg`;
+				const img = new Image();
+				img.onload = function () {
+					reviewImagesContainer.append(
+						`<img src="${imgSrc}" alt="후기 이미지 ${i}" class="trainer-review-image">`
+					);
+				};
+				img.onerror = function () {
+					// 이미지가 없으면 아무것도 하지 않음
+				};
+				img.src = imgSrc;
+			}
+		}
+	});
+
 });
 
 // 헤더와 푸터 로드 함수
