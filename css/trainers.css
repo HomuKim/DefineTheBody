@@ -297,8 +297,8 @@ admin-card img {
 
 /* 사이드바 스타일 */
 .sidebar {
-	margin-top: -300px;
-	padding: 80px;
+	margin-top: -200px;
+	padding: 30px 80px 30px 80px;
 }
 
 /* 탭 목록 기본 스타일 */

@@ -40,10 +40,72 @@ document.addEventListener('DOMContentLoaded', function () {
 			document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 			const targetContent = document.getElementById(targetTab);
 			if (targetContent) targetContent.classList.add('active');
+
+			// 탭 전환 시 상단으로 스크롤
+			window.scrollTo({ top: 100, behavior: 'smooth' });
 		});
 	});
 
 	// 초기 활성 탭 설정 (1층)
 	const initialTab = document.querySelector('.tab-item[data-tab="floor1"]');
 	if (initialTab) initialTab.click();
+
+	const facilityConfigs = [
+		{
+			tabId: 'floor2',
+			folder: 'floor2',
+			prefix: 'facility',
+			ext: 'jpg'
+		},
+		{
+			tabId: 'floor3',
+			folder: 'floor3',
+			prefix: 'facility',
+			ext: 'jpg'
+		},
+		{
+			tabId: 'floor4',
+			folder: 'floor4',
+			prefix: 'facility',
+			ext: 'jpg'
+		},
+		{
+			tabId: 'PTRoom',
+			folder: 'P.T Room',
+			prefix: 'P.T',
+			ext: 'jpg'
+		},
+		{
+			tabId: 'PilatesRoom',
+			folder: 'Pilates Room',
+			prefix: 'Pilates',
+			ext: 'jpg'
+		},
+		{
+			tabId: 'ShowerRoom',
+			folder: 'Shower Room',
+			prefix: 'shower',
+			ext: 'jpg'
+		}
+	];
+
+	facilityConfigs.forEach(cfg => {
+		const container = document.querySelector(`#${cfg.tabId} .image-container`);
+		if (container) {
+			container.innerHTML = '';
+			for (let i = 1; i <= 20; i++) { // 최대 20장까지 시도
+				const div = document.createElement('div');
+				div.className = 'gallery-item';
+				const img = document.createElement('img');
+				img.src = `images/facility/${cfg.folder}/${cfg.prefix}${i}.${cfg.ext}`;
+				img.alt = `${cfg.tabId} ${i}`;
+				img.onerror = function () {
+					if (div.parentNode) div.parentNode.removeChild(div);
+				};
+				div.appendChild(img);
+				container.appendChild(div);
+			}
+		}
+	});
+
 });

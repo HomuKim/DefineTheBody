@@ -72,9 +72,9 @@ $(document).ready(function () {
 	});
 
 	// 트레이너 카드 반복 이미지 자동 생성
-	$('.trainer-card').each(function () {
+	$('.trainer-card, .admin-card').each(function () {
 		const card = $(this);
-		const thumbnailImg = card.find('.trainer-image').attr('src');
+		const thumbnailImg = card.find('.trainer-image, .admin-image').attr('src');
 		const match = thumbnailImg.match(/member\/([^\/]+)/);
 		const folder = match ? match[1] : null;
 
