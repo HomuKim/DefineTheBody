@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (targetContent) targetContent.classList.add('active');
 
 			// 탭 전환 시 상단으로 스크롤
-			window.scrollTo({ top: 100, behavior: 'smooth' });
+			window.scrollTo({ top: 420, behavior: 'smooth' });
 		});
 	});
 

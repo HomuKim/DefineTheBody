@@ -205,22 +205,22 @@ body.fade-out {
 }
 
 .card-event {
-	background-image: url('image/index/event.jpg');
+	background-image: url('/images/event/event-banner1.jpg');
 	background-size: cover;
 }
 
 .card-staff {
-	background-image: url('image/index/staff.jpg');
+	background-image: url('/images/home/staff.png');
 	background-size: cover;
 }
 
 .card-gym {
-	background-image: url('/src/main/webapp/images/home/gym.JPEG');
+	background-image: url('/images/home/gym.JPEG');
 	background-size: cover;
 }
 
 .card-contact {
-	background-image: url('/images/index/contact.jpg');
+	background-image: url('/images/home/contact.jpg');
 	background-size: cover;
 }
 
