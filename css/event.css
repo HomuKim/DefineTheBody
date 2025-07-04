@@ -98,6 +98,7 @@ body.fade-out {
 .event-description h2 {
 	font-size: 28px;
 	margin-bottom: 15px;
+	margin-top: auto;
 	transition: opacity 0.3s ease-in-out;
 }
 
