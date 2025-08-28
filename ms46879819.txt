@@ -1,0 +1,5 @@
+﻿{
+  "Description": "웹 사이트 루트의 위치 Microsoft 365에 대한 도메인 소유권 확인 파일",
+  "Domain": "definethebody.com",
+  "Id": "e64e7f5b-e7bf-4e11-8626-0514e36ca000"
+}
